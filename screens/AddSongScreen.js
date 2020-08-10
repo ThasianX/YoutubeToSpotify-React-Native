@@ -8,6 +8,7 @@ import {
   Text,
   View,
   Button,
+  Linking,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -88,15 +89,19 @@ class AddSongScreen extends React.Component {
           {this.state.spotifyTracks.length > 0 &&
             this.state.spotifyTracks.map((track) => {
               return (
-                <View
-                  style={styles.playlistItem}
+                <TouchableOpacity
                   key={track.title + track.artist + track.album}
+                  onPress={() => {
+                    Linking.openURL(track.link);
+                  }}
                 >
-                  <Text style={styles.playlistItemTitle}>{track.title}</Text>
-                  <Text
-                    style={styles.playlistItemMeta}
-                  >{`${track.artist} • ${track.album}`}</Text>
-                </View>
+                  <View style={styles.playlistItem}>
+                    <Text style={styles.playlistItemTitle}>{track.title}</Text>
+                    <Text
+                      style={styles.playlistItemMeta}
+                    >{`${track.artist} • ${track.album}`}</Text>
+                  </View>
+                </TouchableOpacity>
               );
             })}
         </View>
