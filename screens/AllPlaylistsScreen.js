@@ -5,9 +5,13 @@ import {
   TouchableWithoutFeedback,
   Text,
   TouchableOpacity,
+  Dimensions,
+  ScrollView,
 } from "react-native";
 import ImageTextRow from "../components/ImageTextRow";
 import RoundedButton from "../components/RoundedButton";
+
+const screenHeight = Dimensions.get("window");
 
 class AllPlaylistsScreen extends React.Component {
   state = {
@@ -84,23 +88,25 @@ class AllPlaylistsScreen extends React.Component {
           </View>
         </View>
         <View style={styles.content}>
-          <View style={styles.showNewPlaylistButton}>
-            <RoundedButton
-              title={"NEW PLAYLIST"}
-              onPress={this.showNewPlaylistPopup}
-            />
-          </View>
-          {this.state.playlists.length > 0 &&
-            this.state.playlists.map((playlist) => {
-              return (
-                <ImageTextRow
-                  key={playlist.id}
-                  title={playlist.title}
-                  subtitle={`${playlist.numOfSongs} songs`}
-                  image={playlist.image}
-                />
-              );
-            })}
+          <ScrollView style={{ backgroundColor: "#121212" }}>
+            <View style={styles.showNewPlaylistButton}>
+              <RoundedButton
+                title={"NEW PLAYLIST"}
+                onPress={this.showNewPlaylistPopup}
+              />
+            </View>
+            {this.state.playlists.length > 0 &&
+              this.state.playlists.map((playlist) => {
+                return (
+                  <ImageTextRow
+                    key={playlist.id}
+                    title={playlist.title}
+                    subtitle={`${playlist.numOfSongs} songs`}
+                    image={playlist.image}
+                  />
+                );
+              })}
+          </ScrollView>
         </View>
       </View>
     );
