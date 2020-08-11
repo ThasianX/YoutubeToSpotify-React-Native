@@ -7,15 +7,37 @@ import {
   TouchableOpacity,
   Dimensions,
   ScrollView,
+  Animated,
 } from "react-native";
 import ImageTextRow from "../components/ImageTextRow";
 import RoundedButton from "../components/RoundedButton";
 
-const screenHeight = Dimensions.get("window");
+const screenHeight = Dimensions.get("window").height;
 
 class AllPlaylistsScreen extends React.Component {
   state = {
+    modalOffset: new Animated.Value(screenHeight),
     playlists: [],
+  };
+
+  componentDidMount() {
+    this.toggleModal();
+  }
+
+  componentDidUpdate() {
+    this.toggleModal();
+  }
+
+  toggleModal = () => {
+    if (this.props.show == true) {
+      Animated.spring(this.state.modalOffset, {
+        toValue: 54,
+      }).start();
+    } else {
+      Animated.spring(this.state.modalOffset, {
+        toValue: screenHeight,
+      }).start();
+    }
   };
 
   componentDidMount() {
@@ -76,13 +98,18 @@ class AllPlaylistsScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <Animated.View
+        style={[styles.container, { top: this.state.modalOffset }]}
+      >
         <View style={styles.headerBackground}>
           <View style={styles.center}>
             <View style={styles.leftAlignedCancelButton}>
-              <TouchableWithoutFeedback onPress={this.props.cancel}>
+              <TouchableOpacity
+                onPress={this.props.onBack}
+                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+              >
                 <Text style={styles.cancelButtonText}>Cancel</Text>
-              </TouchableWithoutFeedback>
+              </TouchableOpacity>
             </View>
             <Text style={styles.headerText}>Add to Playlist</Text>
           </View>
@@ -108,14 +135,17 @@ class AllPlaylistsScreen extends React.Component {
               })}
           </ScrollView>
         </View>
-      </View>
+      </Animated.View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    zIndex: 2,
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     overflow: "hidden",

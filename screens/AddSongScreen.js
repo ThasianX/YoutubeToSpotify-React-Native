@@ -9,12 +9,18 @@ import {
   View,
   Button,
   Linking,
+  Animated,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import AllPlaylistsScreen from "./AllPlaylistsScreen";
+import RoundedButton from "../components/RoundedButton";
 
 class AddSongScreen extends React.Component {
   state = {
     spotifyTracks: [],
+    activeTrack: null,
+    showPlaylistsScreen: false,
+    opacity: new Animated.Value(1),
   };
 
   componentDidMount() {
@@ -60,10 +66,36 @@ class AddSongScreen extends React.Component {
     });
   }
 
+  setActiveTrack = (track) => {
+    this.setState({
+      showPlaylistsScreen: true,
+      activeTrack: track,
+    });
+    Animated.spring(this.state.opacity, {
+      toValue: 0.5,
+    }).start();
+  };
+
+  hidePlaylistsScreen = () => {
+    this.setState({
+      showPlaylistsScreen: false,
+      activeTrack: null,
+    });
+    Animated.spring(this.state.opacity, {
+      toValue: 1,
+    }).start();
+  };
+
+  // TOOD: Reconfigure the search query
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
+      <View style={[styles.container]}>
+        <AllPlaylistsScreen
+          track={this.state.activeTrack}
+          show={this.state.showPlaylistsScreen}
+          onBack={this.hidePlaylistsScreen}
+        />
+        <Animated.View style={[styles.header, { opacity: this.state.opacity }]}>
           <View style={styles.headerBackground}>
             <LinearGradient
               colors={["#3f6b6b", "#121212"]}
@@ -80,20 +112,16 @@ class AddSongScreen extends React.Component {
             </View>
             <Text style={styles.trackTitle}>{this.props.track.title}</Text>
             <Text style={styles.trackInfo}>{this.props.track.info}</Text>
-            <TouchableOpacity style={styles.addTrackButton}>
-              <Text style={styles.addTrackText}>ADD TO PLAYLIST</Text>
-            </TouchableOpacity>
+            <RoundedButton title={"RECONFIGURE"} />
           </View>
-        </View>
+        </Animated.View>
         <View style={styles.list}>
           {this.state.spotifyTracks.length > 0 &&
             this.state.spotifyTracks.map((track) => {
               return (
                 <TouchableOpacity
                   key={track.title + track.artist + track.album}
-                  onPress={() => {
-                    Linking.openURL(track.link);
-                  }}
+                  onPress={() => this.setActiveTrack(track)}
                 >
                   <View style={styles.playlistItem}>
                     <Text style={styles.playlistItemTitle}>{track.title}</Text>
@@ -113,6 +141,7 @@ class AddSongScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#121212",
   },
   header: {
     flex: 1,

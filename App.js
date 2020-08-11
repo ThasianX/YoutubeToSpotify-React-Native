@@ -8,7 +8,7 @@ import AllPlaylistsScreen from "./screens/AllPlaylistsScreen";
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
-      <AllPlaylistsScreen />
+      <AddSongScreen track={track} />
       <StatusBar style="dark" />
     </View>
   );
