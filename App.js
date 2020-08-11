@@ -3,11 +3,12 @@ import React from "react";
 import { View } from "react-native";
 import HomeScreen from "./screens/HomeScreen";
 import AddSongScreen from "./screens/AddSongScreen";
+import AllPlaylistsScreen from "./screens/AllPlaylistsScreen";
 
 export default function App() {
   return (
     <View style={{ flex: 1 }}>
-      <AddSongScreen track={track} />
+      <AllPlaylistsScreen />
       <StatusBar style="dark" />
     </View>
   );
