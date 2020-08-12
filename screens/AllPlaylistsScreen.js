@@ -75,11 +75,15 @@ class AllPlaylistsScreen extends React.Component {
   };
 
   handleNewPlaylist = async (name) => {
+    this.setState({
+      showNewPlaylistAlert: false,
+    });
+
     let response = await createNewPlaylist(name);
-    this.props.onBack();
     if (response["error"] == null) {
       this.props.onPlaylistSelected(response);
     }
+    this.props.onBack();
   };
 
   closeNewPlaylistAlert = () => {
@@ -90,7 +94,6 @@ class AllPlaylistsScreen extends React.Component {
 
   // TODO: Add blur effect to the header
   // TODO: Scrollview can't fully scroll to bottom
-  // TODO: once a playlist is clicked, it should call a calback in which the addsongscreen should add the song to the playlist
   render() {
     return (
       <Animated.View
