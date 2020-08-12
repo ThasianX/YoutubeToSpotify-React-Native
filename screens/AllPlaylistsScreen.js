@@ -59,6 +59,11 @@ class AllPlaylistsScreen extends React.Component {
     });
   };
 
+  playlistSelected = async (playlist) => {
+    this.props.onBack();
+    this.props.onPlaylistSelected(playlist);
+  };
+
   // TODO: Add blur effect to the header
   // TODO: Scrollview can't fully scroll to bottom
   // TODO: once a playlist is clicked, it should call a calback in which the addsongscreen should add the song to the playlist
@@ -99,7 +104,7 @@ class AllPlaylistsScreen extends React.Component {
                     title={playlist["name"]}
                     subtitle={`${playlist["tracks"]["total"]} songs`}
                     image={playlist["images"][0]["url"]}
-                    onPress={() => this.props.addSongToPlaylist(playlist)}
+                    onPress={() => this.playlistSelected(playlist)}
                   />
                 );
               })}
@@ -152,50 +157,5 @@ const styles = StyleSheet.create({
     paddingVertical: 24,
   },
 });
-
-const mockPlaylists = [
-  {
-    title: "2020",
-    numOfSongs: 143,
-    image: "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-    id: "58dGcVM5imekX0B4dtijvj",
-  },
-  {
-    title: "2020",
-    numOfSongs: 143,
-    image: "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-    id: "58dGcVM5imerkqrqX0B4dtijvj",
-  },
-  {
-    title: "2020",
-    numOfSongs: 143,
-    image: "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-    id: "58dGcVM5imekdqqX0B4dtijvj",
-  },
-  {
-    title: "2020",
-    numOfSongs: 143,
-    image: "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-    id: "58dGgcVM5imeksX0B4dtijvj",
-  },
-  {
-    title: "2020",
-    numOfSongs: 143,
-    image: "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-    id: "58ddGcVM5imekX0sB4dtijvj",
-  },
-  {
-    title: "2020",
-    numOfSongs: 143,
-    image: "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-    id: "58sdGcVM5imekX0dB4dtijvj",
-  },
-  {
-    title: "2020",
-    numOfSongs: 143,
-    image: "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-    id: "58dssafGcVM5imeksX0B4dtijvj",
-  },
-];
 
 export default AllPlaylistsScreen;

@@ -14,6 +14,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import AllPlaylistsScreen from "./AllPlaylistsScreen";
 import RoundedButton from "../components/RoundedButton";
+import { addTrackToPlaylist } from "../spotify/addTrackToPlaylist";
 
 class AddSongScreen extends React.Component {
   state = {
@@ -89,7 +90,9 @@ class AddSongScreen extends React.Component {
     }).start();
   };
 
-  addActiveTrackToPlaylist = async (playlist) => {};
+  addActiveTrackToPlaylist = async (playlist) => {
+    await addTrackToPlaylist(this.state.activeTrack.uri, playlist.id);
+  };
 
   // TOOD: Reconfigure the search query
   render() {
@@ -99,7 +102,7 @@ class AddSongScreen extends React.Component {
           track={this.state.activeTrack}
           show={this.state.showPlaylistsScreen}
           onBack={this.hidePlaylistsScreen}
-          addSongToPlaylist={this.addSongToPlaylist}
+          onPlaylistSelected={this.addActiveTrackToPlaylist}
         />
         <Animated.View style={[styles.header, { opacity: this.state.opacity }]}>
           <View style={styles.headerBackground}>
