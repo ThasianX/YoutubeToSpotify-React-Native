@@ -1,5 +1,6 @@
 import { AsyncStorage } from "react-native";
 
 export const setUserData = async (key, value) => {
-  return AsyncStorage.setItem(key, JSON.stringify(value));
+  let jsonOfValue = await AsyncStorage.setItem(key, JSON.stringify(value));
+  return jsonOfValue;
 };

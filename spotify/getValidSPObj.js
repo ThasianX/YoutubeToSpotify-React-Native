@@ -8,9 +8,9 @@ export const getValidSPObj = async () => {
     // access token has expired, so we need to use the refresh token
     await refreshTokens();
   }
-  const accessToken = await getUserData("accessToken");
-  console.log(accessToken);
+  let accessToken = await getUserData("accessToken");
+  console.log("new access token: " + accessToken);
   var sp = new SpotifyWebAPI();
-  await sp.setAccessToken(accessToken);
+  sp.setAccessToken(accessToken);
   return sp;
 };

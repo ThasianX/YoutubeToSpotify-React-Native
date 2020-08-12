@@ -71,6 +71,7 @@ class AddSongScreen extends React.Component {
       showPlaylistsScreen: true,
       activeTrack: track,
     });
+    // TODO: should be delayed once the add playlist screen does show
     Animated.spring(this.state.opacity, {
       toValue: 0.5,
       useNativeDriver: true,

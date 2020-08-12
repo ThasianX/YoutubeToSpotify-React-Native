@@ -26,13 +26,19 @@ class AllPlaylistsScreen extends React.Component {
     this.toggleModal();
   }
 
-  async componentDidUpdate() {
-    this.toggleModal();
+  async componentDidUpdate(prevProps) {
+    if (this.props.show === prevProps.show) {
+      return;
+    }
+
+    if (this.props.show) {
+      await this.refreshPlaylists();
+    }
+    this.toggleModal(this.props.show);
   }
 
-  toggleModal = () => {
-    if (this.props.show == true) {
-      // this.refreshPlaylists();
+  toggleModal = (show) => {
+    if (show) {
       Animated.spring(this.state.modalOffset, {
         toValue: 54,
         useNativeDriver: true,
@@ -45,27 +51,23 @@ class AllPlaylistsScreen extends React.Component {
     }
   };
 
-  // refreshPlaylists = async () => {
-  //   const sp = await getValidSPObj();
-  //   const { id: userId } = await sp.getMe();
-  //   const { items: playlists } = await sp.getUserPlaylists(userId, {
-  //     limit: 50,
-  //   });
-  //   console.log(playlists);
-  // };
+  refreshPlaylists = async () => {
+    const sp = await getValidSPObj();
+    const { id: userId } = await sp.getMe();
+    const { items: playlists } = await sp.getUserPlaylists(userId, {
+      limit: 50,
+    });
+    let userOwnedPlaylists = playlists.filter((playlist) => {
+      return playlist["owner"]["id"] === userId.toString();
+    });
+    this.setState({
+      playlists: userOwnedPlaylists,
+    });
+  };
 
-  // async componentDidMount() {
-  //   const sp = await getValidSPObj();
-  //   const { id: userId } = await sp.getMe();
-  //   const { items: playlists } = await sp.getUserPlaylists(userId, {
-  //     limit: 50,
-  //   });
-  //   console.log(playlists);
-  //   // this.setState({
-  //   //   playlists: playlists,
-  //   // });
-  // }
-
+  // TODO: Add blur effect to the header
+  // TODO: Scrollview can't fully scroll to bottom
+  // TODO: once a playlist is clicked, it should call a calback in which the addsongscreen should add the song to the playlist
   render() {
     return (
       <Animated.View
@@ -99,10 +101,10 @@ class AllPlaylistsScreen extends React.Component {
               this.state.playlists.map((playlist) => {
                 return (
                   <ImageTextRow
-                    key={playlist.id}
-                    title={playlist.title}
-                    subtitle={`${playlist.numOfSongs} songs`}
-                    image={playlist.image}
+                    key={playlist["id"]}
+                    title={playlist["name"]}
+                    subtitle={`${playlist["tracks"]["total"]} songs`}
+                    image={playlist["images"][0]["url"]}
                     onPress={() => this.props.addSongToPlaylist(playlist)}
                   />
                 );

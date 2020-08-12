@@ -30,6 +30,7 @@ export const refreshTokens = async () => {
       } = responseJson;
 
       const expirationTime = new Date().getTime() + expiresIn * 1000;
+      console.log("new token: " + newAccessToken);
       await setUserData("accessToken", newAccessToken);
       if (newRefreshToken) {
         await setUserData("refreshToken", newRefreshToken);
