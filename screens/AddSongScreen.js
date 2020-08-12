@@ -88,6 +88,8 @@ class AddSongScreen extends React.Component {
     }).start();
   };
 
+  addSongToPlaylist = () => {};
+
   // TOOD: Reconfigure the search query
   render() {
     return (
@@ -96,6 +98,7 @@ class AddSongScreen extends React.Component {
           track={this.state.activeTrack}
           show={this.state.showPlaylistsScreen}
           onBack={this.hidePlaylistsScreen}
+          addSongToPlaylist={this.addSongToPlaylist}
         />
         <Animated.View style={[styles.header, { opacity: this.state.opacity }]}>
           <View style={styles.headerBackground}>

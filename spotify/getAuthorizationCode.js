@@ -27,9 +27,9 @@ export const getAuthorizationCode = async () => {
     console.error(err);
   }
   console.log(result);
-  if (result.code === undefined) {
+  if (result.params["code"] === undefined) {
     return "";
   } else {
-    return result.params.code;
+    return result.params["code"];
   }
 };

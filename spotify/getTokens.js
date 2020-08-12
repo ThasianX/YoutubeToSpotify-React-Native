@@ -6,6 +6,7 @@ import { getSpotifyCredentials } from "./getSpotifyCredentials";
 export const getTokens = async () => {
   try {
     const authorizationCode = await getAuthorizationCode();
+    console.log("auth" + authorizationCode);
     if (authorizationCode === "") {
       return;
     }

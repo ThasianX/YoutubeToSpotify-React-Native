@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import ImageTextRow from "../components/ImageTextRow";
 import RoundedButton from "../components/RoundedButton";
+import { getValidSPObj } from "../spotify/getValidSPObj";
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -25,12 +26,13 @@ class AllPlaylistsScreen extends React.Component {
     this.toggleModal();
   }
 
-  componentDidUpdate() {
+  async componentDidUpdate() {
     this.toggleModal();
   }
 
   toggleModal = () => {
     if (this.props.show == true) {
+      // this.refreshPlaylists();
       Animated.spring(this.state.modalOffset, {
         toValue: 54,
         useNativeDriver: true,
@@ -43,11 +45,26 @@ class AllPlaylistsScreen extends React.Component {
     }
   };
 
-  componentDidMount() {
-    this.setState({
-      playlists: mockPlaylists,
-    });
-  }
+  // refreshPlaylists = async () => {
+  //   const sp = await getValidSPObj();
+  //   const { id: userId } = await sp.getMe();
+  //   const { items: playlists } = await sp.getUserPlaylists(userId, {
+  //     limit: 50,
+  //   });
+  //   console.log(playlists);
+  // };
+
+  // async componentDidMount() {
+  //   const sp = await getValidSPObj();
+  //   const { id: userId } = await sp.getMe();
+  //   const { items: playlists } = await sp.getUserPlaylists(userId, {
+  //     limit: 50,
+  //   });
+  //   console.log(playlists);
+  //   // this.setState({
+  //   //   playlists: playlists,
+  //   // });
+  // }
 
   render() {
     return (
@@ -86,6 +103,7 @@ class AllPlaylistsScreen extends React.Component {
                     title={playlist.title}
                     subtitle={`${playlist.numOfSongs} songs`}
                     image={playlist.image}
+                    onPress={() => this.props.addSongToPlaylist(playlist)}
                   />
                 );
               })}
