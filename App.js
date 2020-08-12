@@ -4,14 +4,28 @@ import { View } from "react-native";
 import HomeScreen from "./screens/HomeScreen";
 import AddSongScreen from "./screens/AddSongScreen";
 import AllPlaylistsScreen from "./screens/AllPlaylistsScreen";
+import { refreshTokens } from "./spotify/refreshTokens";
+import { getUserData } from "./utils/getUserData";
 
-export default function App() {
-  return (
-    <View style={{ flex: 1 }}>
-      <AddSongScreen track={track} />
-      <StatusBar style="dark" />
-    </View>
-  );
+// TODO: Should probably use redux for storing the tokens and stuff
+export default class App extends React.Component {
+  async componentDidMount() {
+    const tokenExpirationTime = await getUserData("expirationTime");
+    if (!tokenExpirationTime || new Date().getTime() > tokenExpirationTime) {
+      await refreshTokens();
+    } else {
+      this.setState({ accessTokenAvailable: true });
+    }
+  }
+
+  render() {
+    return (
+      <View style={{ flex: 1 }}>
+        <AddSongScreen track={track} />
+        <StatusBar style="dark" />
+      </View>
+    );
+  }
 }
 
 const track = {

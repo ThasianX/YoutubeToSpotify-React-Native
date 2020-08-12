@@ -14,6 +14,7 @@ import RoundedButton from "../components/RoundedButton";
 
 const screenHeight = Dimensions.get("window").height;
 
+// TODO: This screen should always fetch new playlists everytime it's displayed
 class AllPlaylistsScreen extends React.Component {
   state = {
     modalOffset: new Animated.Value(screenHeight),
@@ -32,10 +33,12 @@ class AllPlaylistsScreen extends React.Component {
     if (this.props.show == true) {
       Animated.spring(this.state.modalOffset, {
         toValue: 54,
+        useNativeDriver: true,
       }).start();
     } else {
       Animated.spring(this.state.modalOffset, {
         toValue: screenHeight,
+        useNativeDriver: true,
       }).start();
     }
   };
@@ -49,7 +52,10 @@ class AllPlaylistsScreen extends React.Component {
   render() {
     return (
       <Animated.View
-        style={[styles.container, { top: this.state.modalOffset }]}
+        style={[
+          styles.container,
+          { transform: [{ translateY: this.state.modalOffset }] },
+        ]}
       >
         <View style={styles.headerBackground}>
           <View style={styles.center}>

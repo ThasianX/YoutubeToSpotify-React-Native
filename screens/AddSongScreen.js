@@ -73,6 +73,7 @@ class AddSongScreen extends React.Component {
     });
     Animated.spring(this.state.opacity, {
       toValue: 0.5,
+      useNativeDriver: true,
     }).start();
   };
 
@@ -83,6 +84,7 @@ class AddSongScreen extends React.Component {
     });
     Animated.spring(this.state.opacity, {
       toValue: 1,
+      useNativeDriver: true,
     }).start();
   };
 
