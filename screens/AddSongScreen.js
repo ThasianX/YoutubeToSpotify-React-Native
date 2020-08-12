@@ -24,7 +24,7 @@ class AddSongScreen extends React.Component {
     activeTrack: null,
     showPlaylistsScreen: false,
     opacity: new Animated.Value(1),
-    alert: undefined,
+    alert: null,
   };
 
   componentDidMount() {
@@ -100,7 +100,7 @@ class AddSongScreen extends React.Component {
     );
 
     let alert;
-    if (response["error"] == undefined) {
+    if (response["error"] == null) {
       alert = {
         image: checkmark,
         message: `Added to ${playlist["name"]}.`,
@@ -119,7 +119,7 @@ class AddSongScreen extends React.Component {
 
   resetAlert = () => {
     this.setState({
-      alert: undefined,
+      alert: null,
     });
   };
 

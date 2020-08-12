@@ -12,14 +12,18 @@ import {
 import ImageTextRow from "../components/ImageTextRow";
 import RoundedButton from "../components/RoundedButton";
 import { getAllUserOwnedPlaylists } from "../spotify/getAllUserOwnedPlaylists";
+import DialogAlert from "../components/DialogAlert";
+import { createNewPlaylist } from "../spotify/createNewPlaylist";
 
 const screenHeight = Dimensions.get("window").height;
 
 // TODO: This screen should always fetch new playlists everytime it's displayed
+// TODO: reset scroll state everytime this view is dismissed
 class AllPlaylistsScreen extends React.Component {
   state = {
     modalOffset: new Animated.Value(screenHeight),
     playlists: [],
+    showNewPlaylistAlert: false,
   };
 
   componentDidMount() {
@@ -64,6 +68,26 @@ class AllPlaylistsScreen extends React.Component {
     this.props.onPlaylistSelected(playlist);
   };
 
+  showNewPlaylistPopup = () => {
+    this.setState({
+      showNewPlaylistAlert: true,
+    });
+  };
+
+  handleNewPlaylist = async (name) => {
+    let response = await createNewPlaylist(name);
+    this.props.onBack();
+    if (response["error"] == null) {
+      this.props.onPlaylistSelected(response);
+    }
+  };
+
+  closeNewPlaylistAlert = () => {
+    this.setState({
+      showNewPlaylistAlert: false,
+    });
+  };
+
   // TODO: Add blur effect to the header
   // TODO: Scrollview can't fully scroll to bottom
   // TODO: once a playlist is clicked, it should call a calback in which the addsongscreen should add the song to the playlist
@@ -75,6 +99,18 @@ class AllPlaylistsScreen extends React.Component {
           { transform: [{ translateY: this.state.modalOffset }] },
         ]}
       >
+        {this.props.show && (
+          <DialogAlert
+            isDialogVisible={this.state.showNewPlaylistAlert}
+            title={"Create New Playlist"}
+            message={"Enter a name for this new playlist"}
+            initValueTextInput={
+              this.props.activeTrack != null ? this.props.activeTrack.title : ""
+            }
+            submitInput={this.handleNewPlaylist}
+            closeDialog={this.closeNewPlaylistAlert}
+          />
+        )}
         <View style={styles.headerBackground}>
           <View style={styles.center}>
             <View style={styles.leftAlignedCancelButton}>
@@ -103,7 +139,11 @@ class AllPlaylistsScreen extends React.Component {
                     key={playlist["id"]}
                     title={playlist["name"]}
                     subtitle={`${playlist["tracks"]["total"]} songs`}
-                    image={playlist["images"][0]["url"]}
+                    image={
+                      playlist["images"].length > 0
+                        ? playlist["images"][0]["url"]
+                        : null
+                    }
                     onPress={() => this.playlistSelected(playlist)}
                   />
                 );

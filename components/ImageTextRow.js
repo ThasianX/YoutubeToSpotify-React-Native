@@ -1,12 +1,16 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import { emptyPlaylist } from "../utils/images";
 
 // TODO: should use `Pressable` API and make the background black when pressed
 const ImageTextRow = (props) => {
   return (
     <TouchableOpacity style={styles.container} onPress={props.onPress}>
       <View style={styles.hStack}>
-        <Image style={styles.image} source={{ uri: props.image }} />
+        <Image
+          style={styles.image}
+          source={props.image == null ? emptyPlaylist : { uri: props.image }}
+        />
         <View style={styles.textVStack}>
           <Text style={styles.title}>{props.title}</Text>
           <Text style={styles.subtitle}>{props.subtitle}</Text>
