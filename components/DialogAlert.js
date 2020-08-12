@@ -12,49 +12,40 @@ import {
 // https://github.com/joseestrella89/react-native-dialog-input/blob/master/index.js
 
 // TODO: add the keyboard animation that spotify uses
-class DialogAlert extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = { inputModal: props.initValueTextInput, openning: true };
-  }
+class DialogAlert extends React.Component {
+  state = {
+    inputText: "",
+  };
 
   handleOnRequestClose = () => {
     this.props.closeDialog();
-    this.setState({ inputModal: "" });
   };
 
-  handleOnKeyPress = () => {
-    this.setState({ openning: false });
-  };
-
-  handleOnChangeText = (inputModal) => {
-    this.setState({ inputModal, openning: false });
+  handleOnChangeText = (text) => {
+    this.setState({ inputText: text });
   };
 
   handleOnCloseDialog = () => {
     this.props.closeDialog();
-    this.setState({ inputModal: "", openning: true });
   };
 
   handleSubmit = () => {
-    this.props.submitInput(this.state.inputModal);
-    this.setState({ inputModal: "", openning: true });
+    this.props.submitInput(this.state.inputText);
   };
 
   isTextInputBlank = () => {
-    return this.state.inputModal.length > 0;
+    return this.state.inputText.length > 0;
   };
 
-  render() {
-    let value;
-    if (!this.state.openning) {
-      value = this.state.inputModal;
-    } else {
-      value = this.props.initValueTextInput
-        ? this.props.initValueTextInput
-        : "";
+  componentDidUpdate(prevProps) {
+    if (this.props.initialInputText != prevProps.initialInputText) {
+      this.setState({
+        inputText: this.props.initialInputText,
+      });
     }
+  }
 
+  render() {
     return (
       <Modal
         animationType={"fade"}
@@ -73,10 +64,9 @@ class DialogAlert extends PureComponent {
                 style={styles.input_container}
                 autoCorrect={false}
                 autoFocus={true}
-                onKeyPress={this.handleOnKeyPress}
                 underlineColorAndroid="transparent"
                 onChangeText={this.handleOnChangeText}
-                value={value}
+                value={this.state.inputText}
               />
             </View>
             <View style={styles.btn_container}>

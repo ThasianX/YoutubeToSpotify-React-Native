@@ -102,14 +102,14 @@ class AllPlaylistsScreen extends React.Component {
           { transform: [{ translateY: this.state.modalOffset }] },
         ]}
       >
-        {this.props.show && (
-          <DialogAlert
-            isDialogVisible={this.state.showNewPlaylistAlert}
-            initValueTextInput={this.props.track.title}
-            submitInput={this.handleNewPlaylist}
-            closeDialog={this.closeNewPlaylistAlert}
-          />
-        )}
+        <DialogAlert
+          isDialogVisible={this.state.showNewPlaylistAlert}
+          initialInputText={
+            this.props.track != null ? this.props.track.title : ""
+          }
+          submitInput={this.handleNewPlaylist}
+          closeDialog={this.closeNewPlaylistAlert}
+        />
         <View style={styles.headerBackground}>
           <View style={styles.center}>
             <View style={styles.leftAlignedCancelButton}>
