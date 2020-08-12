@@ -89,7 +89,7 @@ class AddSongScreen extends React.Component {
     }).start();
   };
 
-  addSongToPlaylist = () => {};
+  addActiveTrackToPlaylist = async (playlist) => {};
 
   // TOOD: Reconfigure the search query
   render() {

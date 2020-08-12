@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import ImageTextRow from "../components/ImageTextRow";
 import RoundedButton from "../components/RoundedButton";
-import { getValidSPObj } from "../spotify/getValidSPObj";
+import { getAllUserOwnedPlaylists } from "../spotify/getAllUserOwnedPlaylists";
 
 const screenHeight = Dimensions.get("window").height;
 
@@ -52,14 +52,8 @@ class AllPlaylistsScreen extends React.Component {
   };
 
   refreshPlaylists = async () => {
-    const sp = await getValidSPObj();
-    const { id: userId } = await sp.getMe();
-    const { items: playlists } = await sp.getUserPlaylists(userId, {
-      limit: 50,
-    });
-    let userOwnedPlaylists = playlists.filter((playlist) => {
-      return playlist["owner"]["id"] === userId.toString();
-    });
+    const userOwnedPlaylists = await getAllUserOwnedPlaylists();
+    // TODO: I think here would be a good place to call a callback to the addsongscreen for it to dim its opacity
     this.setState({
       playlists: userOwnedPlaylists,
     });
