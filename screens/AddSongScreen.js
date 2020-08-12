@@ -15,6 +15,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import AllPlaylistsScreen from "./AllPlaylistsScreen";
 import RoundedButton from "../components/RoundedButton";
 import { addTrackToPlaylist } from "../spotify/addTrackToPlaylist";
+import { checkmark, cross } from "../utils/images";
+import TransientAlert from "../components/TransientAlert";
 
 class AddSongScreen extends React.Component {
   state = {
@@ -22,6 +24,7 @@ class AddSongScreen extends React.Component {
     activeTrack: null,
     showPlaylistsScreen: false,
     opacity: new Animated.Value(1),
+    alert: undefined,
   };
 
   componentDidMount() {
@@ -91,7 +94,33 @@ class AddSongScreen extends React.Component {
   };
 
   addActiveTrackToPlaylist = async (playlist) => {
-    await addTrackToPlaylist(this.state.activeTrack.uri, playlist.id);
+    let response = await addTrackToPlaylist(
+      this.state.activeTrack.uri,
+      playlist.id
+    );
+
+    let alert;
+    if (response["error"] == undefined) {
+      alert = {
+        image: checkmark,
+        message: `Added to ${playlist["name"]}.`,
+      };
+    } else {
+      alert = {
+        image: cross,
+        message: `Failed adding to ${playlist["name"]}.`,
+      };
+    }
+
+    this.setState({
+      alert: alert,
+    });
+  };
+
+  resetAlert = () => {
+    this.setState({
+      alert: undefined,
+    });
   };
 
   // TOOD: Reconfigure the search query
@@ -104,6 +133,9 @@ class AddSongScreen extends React.Component {
           onBack={this.hidePlaylistsScreen}
           onPlaylistSelected={this.addActiveTrackToPlaylist}
         />
+        {this.state.alert && (
+          <TransientAlert {...this.state.alert} onEnded={this.resetAlert} />
+        )}
         <Animated.View style={[styles.header, { opacity: this.state.opacity }]}>
           <View style={styles.headerBackground}>
             <LinearGradient
