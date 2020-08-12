@@ -102,11 +102,7 @@ class AllPlaylistsScreen extends React.Component {
         {this.props.show && (
           <DialogAlert
             isDialogVisible={this.state.showNewPlaylistAlert}
-            title={"Create New Playlist"}
-            message={"Enter a name for this new playlist"}
-            initValueTextInput={
-              this.props.activeTrack != null ? this.props.activeTrack.title : ""
-            }
+            initValueTextInput={this.props.track.title}
             submitInput={this.handleNewPlaylist}
             closeDialog={this.closeNewPlaylistAlert}
           />

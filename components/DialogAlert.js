@@ -12,7 +12,6 @@ import {
 // https://github.com/joseestrella89/react-native-dialog-input/blob/master/index.js
 
 // TODO: add the keyboard animation that spotify uses
-// TODO: the create button should be inactive if the textinput text length is 0
 class DialogAlert extends PureComponent {
   constructor(props) {
     super(props);
@@ -42,10 +41,12 @@ class DialogAlert extends PureComponent {
     this.setState({ inputModal: "", openning: true });
   };
 
+  isTextInputBlank = () => {
+    return this.state.inputModal.length > 0;
+  };
+
   render() {
-    const title = this.props.title || "";
-    const hintInput = this.props.hintInput || "";
-    let value = "";
+    let value;
     if (!this.state.openning) {
       value = this.state.inputModal;
     } else {
@@ -54,33 +55,19 @@ class DialogAlert extends PureComponent {
         : "";
     }
 
-    const textProps = this.props.textInputProps || null;
-    const modalStyleProps = this.props.modalStyle || {};
-    const dialogStyleProps = this.props.dialogStyle || {};
-    const placeholderTextColor = this.props.placeholderTextColor;
-    const animationType = this.props.animationType || "fade";
-    let cancelText = this.props.cancelText || "Cancel";
-    let submitText = this.props.submitText || "Submit";
-    cancelText = Platform.OS === "ios" ? cancelText : cancelText.toUpperCase();
-    submitText = Platform.OS === "ios" ? submitText : submitText.toUpperCase();
-
     return (
       <Modal
-        animationType={animationType}
+        animationType={"fade"}
         transparent={true}
         visible={this.props.isDialogVisible}
         onRequestClose={this.handleOnRequestClose}
       >
         <View style={[styles.container]}>
-          <View style={[styles.modal_container, { ...dialogStyleProps }]}>
+          <View style={styles.modal_container}>
             <View style={styles.modal_body}>
-              <Text style={styles.title_modal}>{title}</Text>
-              <Text
-                style={[
-                  this.props.message ? styles.message_modal : { height: 0 },
-                ]}
-              >
-                {this.props.message}
+              <Text style={styles.title_modal}>{"Create New Playlist"}</Text>
+              <Text style={styles.message_modal}>
+                {"Enter a name for this new playlist"}
               </Text>
               <TextInput
                 style={styles.input_container}
@@ -88,8 +75,6 @@ class DialogAlert extends PureComponent {
                 autoFocus={true}
                 onKeyPress={this.handleOnKeyPress}
                 underlineColorAndroid="transparent"
-                placeholder={hintInput}
-                placeholderTextColor={placeholderTextColor}
                 onChangeText={this.handleOnChangeText}
                 value={value}
               />
@@ -99,14 +84,24 @@ class DialogAlert extends PureComponent {
                 style={styles.touch_modal}
                 onPress={this.handleOnCloseDialog}
               >
-                <Text style={styles.btn_modal_left}>Cancel</Text>
+                <Text style={styles.btn_modal_left}>{"Cancel"}</Text>
               </TouchableOpacity>
               <View style={styles.divider_btn}></View>
               <TouchableOpacity
-                style={styles.touch_modal}
+                style={[styles.touch_modal]}
+                disabled={!this.isTextInputBlank()}
                 onPress={this.handleSubmit}
               >
-                <Text style={styles.btn_modal_right}>Create</Text>
+                <Text
+                  style={[
+                    styles.btn_modal_right,
+                    {
+                      color: this.isTextInputBlank() ? "#408AE2" : "gray",
+                    },
+                  ]}
+                >
+                  {"Create"}
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -265,7 +260,6 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         fontSize: 15,
-        color: "#408AE2",
         textAlign: "center",
       },
       android: {
