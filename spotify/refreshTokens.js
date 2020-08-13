@@ -20,8 +20,10 @@ export const refreshTokens = async () => {
       body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
     });
     const responseJson = await response.json();
+
+    let newTokens;
     if (responseJson.error) {
-      await getTokens();
+      newTokens = await getTokens();
     } else {
       const {
         access_token: newAccessToken,
@@ -30,15 +32,15 @@ export const refreshTokens = async () => {
       } = responseJson;
 
       const expirationTime = new Date().getTime() + expiresIn * 1000;
-      console.log("new token: " + newAccessToken);
-      await setUserData("accessToken", newAccessToken);
-      if (newRefreshToken) {
-        await setUserData("refreshToken", newRefreshToken);
-      }
-      await setUserData("expirationTime", expirationTime);
+      newTokens = {
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken || refreshToken,
+        expirationTime: expirationTime,
+      };
     }
   } catch (error) {
-    console.log("refresh error");
-    console.error(error);
+    console.error(`Error occurred while refreshing tokens: ${error}`);
   }
+
+  return newTokens;
 };

@@ -24,12 +24,7 @@ export const getAuthorizationCode = async () => {
         encodeURIComponent(credentials.redirectUri),
     });
   } catch (err) {
-    console.error(err);
+    throw `Error occurred while getting authorization code: ${err}`;
   }
-  console.log(result);
-  if (result.params["code"] == null) {
-    return "";
-  } else {
-    return result.params["code"];
-  }
+  return result.params["code"];
 };
