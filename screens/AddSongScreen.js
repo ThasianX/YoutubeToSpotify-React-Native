@@ -32,10 +32,10 @@ class AddSongScreen extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getTracks(
-      this.props.trackKeywords.join(" "),
-      this.props.artistKeywords.join(" ")
-    );
+    // this.props.getTracks(
+    //   this.props.trackKeywords.join(" "),
+    //   this.props.artistKeywords.join(" ")
+    // );
   }
 
   componentDidUpdate(prevProps) {
@@ -82,7 +82,14 @@ class AddSongScreen extends React.Component {
               <Text style={styles.trackInfo}>
                 {this.props.videoDetails.info}
               </Text>
-              <RoundedButton title={"RECONFIGURE"} />
+              <RoundedButton
+                title={"TRACK"}
+                subtitle={this.props.trackKeywords.join(" ")}
+              />
+              <RoundedButton
+                title={"ARTIST"}
+                subtitle={this.props.artistKeywords.join(" ")}
+              />
             </View>
           )}
         </Animated.View>
@@ -111,7 +118,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#121212",
   },
   header: {
-    flex: 1,
+    flex: 1.2,
   },
   headerBackground: {
     width: "100%",
@@ -154,7 +161,7 @@ const styles = StyleSheet.create({
     color: "#b9bdbe",
     fontSize: 12,
     paddingTop: 10,
-    paddingBottom: 30,
+    paddingBottom: 20,
   },
   addTrackButton: {
     backgroundColor: "#2ab759",

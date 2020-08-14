@@ -6,6 +6,7 @@ import { persistStore, persistReducer } from "redux-persist";
 
 import rootReducer from "./reducers";
 
+// TODO: Fix the config cuz it's caching even the other reducers
 const persistConfig = {
   key: "root",
   storage: AsyncStorage,
