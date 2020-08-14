@@ -1,7 +1,5 @@
 import { encode as btoa } from "base-64";
-import { getAuthorizationCode } from "./getAuthorizationCode";
-import { setUserData } from "../utils/setUserData";
-import { getSpotifyCredentials } from "./getSpotifyCredentials";
+import { getAuthorizationCode, getSpotifyCredentials } from "./";
 
 export const getTokens = async () => {
   const authorizationCode = await getAuthorizationCode();

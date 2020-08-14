@@ -1,16 +1,13 @@
 import { encode as btoa } from "base-64";
-import { getTokens } from "./getTokens";
-import { setUserData } from "../utils/setUserData";
-import { getUserData } from "../utils/getUserData";
-import { getSpotifyCredentials } from "./getSpotifyCredentials";
+import { getTokens, getSpotifyCredentials } from "./";
 
-export const refreshTokens = async () => {
+export const refreshTokens = async (authData) => {
   try {
     const credentials = await getSpotifyCredentials();
     const credsB64 = btoa(
       `${credentials.clientId}:${credentials.clientSecret}`
     );
-    const refreshToken = await getUserData("refreshToken");
+    const refreshToken = authData.refreshToken;
     const response = await fetch("https://accounts.spotify.com/api/token", {
       method: "POST",
       headers: {
@@ -39,6 +36,7 @@ export const refreshTokens = async () => {
       };
     }
   } catch (error) {
+    // TODO: improve this catch logic
     console.error(`Error occurred while refreshing tokens: ${error}`);
   }
 

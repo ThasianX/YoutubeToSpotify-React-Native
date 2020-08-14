@@ -7,134 +7,58 @@ import {
   Image,
   Text,
   View,
-  Button,
-  Linking,
   Animated,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import AllPlaylistsScreen from "./AllPlaylistsScreen";
 import RoundedButton from "../components/RoundedButton";
-import { addTrackToPlaylist } from "../spotify/addTrackToPlaylist";
-import { checkmark, cross } from "../utils/images";
 import TransientAlert from "../components/TransientAlert";
-
+import {
+  getTracks,
+  setActiveVideo,
+  setSelectedTrack,
+  resetAlert,
+} from "../redux/actions";
+import { connect } from "react-redux";
+import ImageTextRow from "../components/ImageTextRow";
 class AddSongScreen extends React.Component {
-  state = {
-    spotifyTracks: [],
-    activeTrack: null,
-    showPlaylistsScreen: false,
-    opacity: new Animated.Value(1),
-    alert: null,
-  };
+  constructor(props) {
+    super(props);
 
-  componentDidMount() {
-    this.setState({
-      spotifyTracks: [
-        {
-          title: "Lean Wit Me",
-          artist: "Juice WRLD",
-          album: "Goodbye & Good Riddance",
-          albumImage:
-            "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-          link: "https://open.spotify.com/track/3oDkdAySo1VQQG0ptV7uwa",
-          uri: "spotify:track:3oDkdAySo1VQQG0ptV7uwa",
-        },
-        {
-          title: "Lean Wit Me",
-          artist: "Juice WRLD",
-          album: "Hip Hop Love",
-          albumImage:
-            "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-          link: "https://open.spotify.com/track/3oDkdAySo1VQQG0ptV7uwa",
-          uri: "spotify:track:3oDkdAySo1VQQG0ptV7uwa",
-        },
-        {
-          title: "Lean Wit Me - Instrumental",
-          artist: "Molotov Cocktail Piano",
-          album: "MCP Performs Juice WRLD",
-          albumImage:
-            "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-          link: "https://open.spotify.com/track/3oDkdAySo1VQQG0ptV7uwa",
-          uri: "spotify:track:3oDkdAySo1VQQG0ptV7uwa",
-        },
-        {
-          title: "Lean Wit Me(Remix)",
-          artist: "Jayrole",
-          album: "Just the Beginning",
-          albumImage:
-            "https://i.scdn.co/image/ab67616d00004851f7db43292a6a99b21b51d5b4",
-          link: "https://open.spotify.com/track/3oDkdAySo1VQQG0ptV7uwa",
-          uri: "spotify:track:3oDkdAySo1VQQG0ptV7uwa",
-        },
-      ],
-    });
+    this.state = {
+      opacity: new Animated.Value(1),
+    };
+    this.props.setActiveVideo("");
   }
 
-  setActiveTrack = (track) => {
-    this.setState({
-      showPlaylistsScreen: true,
-      activeTrack: track,
-    });
-    // TODO: should be delayed once the add playlist screen does show
-    Animated.spring(this.state.opacity, {
-      toValue: 0.5,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  hidePlaylistsScreen = () => {
-    this.setState({
-      showPlaylistsScreen: false,
-      activeTrack: null,
-    });
-    Animated.spring(this.state.opacity, {
-      toValue: 1,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  addActiveTrackToPlaylist = async (playlist) => {
-    let response = await addTrackToPlaylist(
-      this.state.activeTrack.uri,
-      playlist.id
+  componentDidMount() {
+    this.props.getTracks(
+      this.props.trackKeywords.join(" "),
+      this.props.artistKeywords.join(" ")
     );
+  }
 
-    let alert;
-    if (response["error"] == null) {
-      alert = {
-        image: checkmark,
-        message: `Added to ${playlist["name"]}.`,
-      };
-    } else {
-      alert = {
-        image: cross,
-        message: `Failed adding to ${playlist["name"]}.`,
-      };
+  componentDidUpdate(prevProps) {
+    if (prevProps.isShowingPlaylists !== this.props.isShowingPlaylists) {
+      Animated.spring(this.state.opacity, {
+        toValue: this.props.isShowingPlaylists ? 0.5 : 1,
+        useNativeDriver: true,
+      }).start();
     }
+  }
 
-    this.setState({
-      alert: alert,
-    });
-  };
-
-  resetAlert = () => {
-    this.setState({
-      alert: null,
-    });
-  };
-
-  // TOOD: Reconfigure the search query
+  // TODO: Reconfigure the search query view. Make it have like 2 different buttons(track and artist)
+  // TODO: Maybe add some sort of indicator as its loading
+  // TODO: Everything works but the transient alert isn't going away after it shows
   render() {
     return (
       <View style={[styles.container]}>
-        <AllPlaylistsScreen
-          track={this.state.activeTrack}
-          show={this.state.showPlaylistsScreen}
-          onBack={this.hidePlaylistsScreen}
-          onPlaylistSelected={this.addActiveTrackToPlaylist}
-        />
-        {this.state.alert && (
-          <TransientAlert {...this.state.alert} onEnded={this.resetAlert} />
+        <AllPlaylistsScreen />
+        {this.props.alert && (
+          <TransientAlert
+            {...this.props.alert}
+            onEnded={this.props.resetAlert}
+          />
         )}
         <Animated.View style={[styles.header, { opacity: this.state.opacity }]}>
           <View style={styles.headerBackground}>
@@ -143,34 +67,42 @@ class AddSongScreen extends React.Component {
               style={styles.gradient}
             />
           </View>
-          <View style={styles.headerOverlay}>
-            <View style={styles.trackThumbnailContainer}>
-              <Image
-                style={styles.trackThumbnail}
-                source={{ uri: this.props.track.thumbnail }}
-                resizeMode="cover"
-              />
+          {this.props.videoDetails != null && (
+            <View style={styles.headerOverlay}>
+              <View style={styles.trackThumbnailContainer}>
+                <Image
+                  style={styles.trackThumbnail}
+                  source={{ uri: this.props.videoDetails.thumbnail }}
+                  resizeMode="cover"
+                />
+              </View>
+              <Text style={styles.trackTitle}>
+                {this.props.videoDetails.title}
+              </Text>
+              <Text style={styles.trackInfo}>
+                {this.props.videoDetails.info}
+              </Text>
+              <RoundedButton title={"RECONFIGURE"} />
             </View>
-            <Text style={styles.trackTitle}>{this.props.track.title}</Text>
-            <Text style={styles.trackInfo}>{this.props.track.info}</Text>
-            <RoundedButton title={"RECONFIGURE"} />
-          </View>
+          )}
         </Animated.View>
         <View style={styles.list}>
-          {this.state.spotifyTracks.length > 0 &&
-            this.state.spotifyTracks.map((track) => {
+          {!this.props.isLoading &&
+            this.props.spotifyTracks.map((track) => {
               return (
-                <TouchableOpacity
-                  key={track.title + track.artist + track.album}
-                  onPress={() => this.setActiveTrack(track)}
-                >
-                  <View style={styles.playlistItem}>
-                    <Text style={styles.playlistItemTitle}>{track.title}</Text>
-                    <Text
-                      style={styles.playlistItemMeta}
-                    >{`${track.artist} • ${track.album}`}</Text>
-                  </View>
-                </TouchableOpacity>
+                <ImageTextRow
+                  key={track["id"]}
+                  image={
+                    track["album"]["images"].length > 0
+                      ? track["album"]["images"][0]["url"]
+                      : null
+                  }
+                  title={track["name"]}
+                  subtitle={`${track["artists"]
+                    .map((artist) => artist["name"])
+                    .join(", ")} • ${track["album"]["name"]}`}
+                  onPress={() => this.props.setSelectedTrack(track)}
+                />
               );
             })}
         </View>
@@ -262,4 +194,27 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddSongScreen;
+const mapStateToProps = (state) => ({
+  videoDetails: state.tracksReducer.videoDetails,
+  isLoading: state.tracksReducer.isLoadingTracks,
+  spotifyTracks: state.tracksReducer.spotifyTracks,
+  trackKeywords: state.tracksReducer.trackKeywords,
+  artistKeywords: state.tracksReducer.artistKeywords,
+  isShowingPlaylists: state.tracksReducer.isShowingPlaylists,
+  alert: state.tracksReducer.alert,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setActiveVideo: (videoId) => {
+    dispatch(setActiveVideo(videoId));
+  },
+  getTracks: (trackKeywords, artistKeywords) => {
+    dispatch(getTracks(trackKeywords, artistKeywords));
+  },
+  setSelectedTrack: (track) => {
+    dispatch(setSelectedTrack(track));
+  },
+  resetAlert: () => dispatch(resetAlert()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddSongScreen);

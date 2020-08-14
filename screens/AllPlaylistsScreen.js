@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   StyleSheet,
-  TouchableWithoutFeedback,
   Text,
   TouchableOpacity,
   Dimensions,
@@ -11,34 +10,32 @@ import {
 } from "react-native";
 import ImageTextRow from "../components/ImageTextRow";
 import RoundedButton from "../components/RoundedButton";
-import { getAllUserOwnedPlaylists } from "../spotify/getAllUserOwnedPlaylists";
 import DialogAlert from "../components/DialogAlert";
-import { createNewPlaylist } from "../spotify/createNewPlaylist";
+import { connect } from "react-redux";
+import {
+  createPlaylist,
+  addTrackToSpotifyPlaylist,
+  hidePlaylists,
+} from "../redux/actions";
 
 const screenHeight = Dimensions.get("window").height;
 
-// TODO: This screen should always fetch new playlists everytime it's displayed
 // TODO: reset scroll state everytime this view is dismissed
 class AllPlaylistsScreen extends React.Component {
   state = {
     modalOffset: new Animated.Value(screenHeight),
-    playlists: [],
-    showNewPlaylistAlert: false,
+    isShowingNewPlaylistAlert: false,
   };
 
   componentDidMount() {
     this.toggleModal();
   }
 
-  async componentDidUpdate(prevProps) {
-    if (this.props.show === prevProps.show) {
-      return;
+  // TODO: figure out if toggle modal is being called twice here
+  componentDidUpdate(prevProps) {
+    if (this.props.show !== prevProps.show) {
+      this.toggleModal(this.props.show);
     }
-
-    if (this.props.show) {
-      await this.refreshPlaylists();
-    }
-    this.toggleModal(this.props.show);
   }
 
   toggleModal = (show) => {
@@ -55,40 +52,20 @@ class AllPlaylistsScreen extends React.Component {
     }
   };
 
-  refreshPlaylists = async () => {
-    const userOwnedPlaylists = await getAllUserOwnedPlaylists();
-    // TODO: I think here would be a good place to call a callback to the addsongscreen for it to dim its opacity
-    this.setState({
-      playlists: userOwnedPlaylists,
-    });
+  createNewPlaylist = (name) => {
+    this.closeNewPlaylistAlert();
+    this.props.createPlaylist(name);
   };
 
-  playlistSelected = async (playlist) => {
-    this.props.onBack();
-    this.props.onPlaylistSelected(playlist);
-  };
-
-  showNewPlaylistPopup = () => {
+  showNewPlaylistAlert = () => {
     this.setState({
-      showNewPlaylistAlert: true,
+      isShowingNewPlaylistAlert: true,
     });
-  };
-
-  handleNewPlaylist = async (name) => {
-    this.setState({
-      showNewPlaylistAlert: false,
-    });
-
-    let response = await createNewPlaylist(name);
-    if (response["error"] == null) {
-      this.props.onPlaylistSelected(response);
-    }
-    this.props.onBack();
   };
 
   closeNewPlaylistAlert = () => {
     this.setState({
-      showNewPlaylistAlert: false,
+      isShowingNewPlaylistAlert: false,
     });
   };
 
@@ -103,11 +80,11 @@ class AllPlaylistsScreen extends React.Component {
         ]}
       >
         <DialogAlert
-          isDialogVisible={this.state.showNewPlaylistAlert}
+          isDialogVisible={this.state.isShowingNewPlaylistAlert}
           initialInputText={
             this.props.track != null ? this.props.track.title : ""
           }
-          submitInput={this.handleNewPlaylist}
+          submitInput={this.createNewPlaylist}
           closeDialog={this.closeNewPlaylistAlert}
         />
         <View style={styles.headerBackground}>
@@ -117,10 +94,10 @@ class AllPlaylistsScreen extends React.Component {
                 onPress={this.props.onBack}
                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
               >
-                <Text style={styles.cancelButtonText}>Cancel</Text>
+                <Text style={styles.cancelButtonText}>{"Cancel"}</Text>
               </TouchableOpacity>
             </View>
-            <Text style={styles.headerText}>Add to Playlist</Text>
+            <Text style={styles.headerText}>{"Add to Playlist"}</Text>
           </View>
         </View>
         <View style={styles.content}>
@@ -128,11 +105,11 @@ class AllPlaylistsScreen extends React.Component {
             <View style={styles.showNewPlaylistButton}>
               <RoundedButton
                 title={"NEW PLAYLIST"}
-                onPress={this.showNewPlaylistPopup}
+                onPress={this.showNewPlaylistAlert}
               />
             </View>
-            {this.state.playlists.length > 0 &&
-              this.state.playlists.map((playlist) => {
+            {this.props.playlists.length > 0 &&
+              this.props.playlists.map((playlist) => {
                 return (
                   <ImageTextRow
                     key={playlist["id"]}
@@ -143,7 +120,7 @@ class AllPlaylistsScreen extends React.Component {
                         ? playlist["images"][0]["url"]
                         : null
                     }
-                    onPress={() => this.playlistSelected(playlist)}
+                    onPress={() => this.props.playlistSelected(playlist)}
                   />
                 );
               })}
@@ -197,4 +174,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AllPlaylistsScreen;
+mapStateToProps = (state) => ({
+  show: state.tracksReducer.isShowingPlaylists,
+  playlists: state.playlistsReducer.playlists,
+});
+
+mapDispatchToProps = (dispatch) => ({
+  onBack: () => dispatch(hidePlaylists()),
+  createPlaylist: (playlistName) => {
+    dispatch(createPlaylist(playlistName));
+  },
+  playlistSelected: (playlist) => {
+    dispatch(addTrackToSpotifyPlaylist(playlist));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllPlaylistsScreen);

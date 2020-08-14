@@ -3,12 +3,14 @@ import { AuthActions } from "../actionTypes";
 const initialState = {
   isLoggingIn: false,
   loggedIn: false,
-  accessToken: "",
-  refreshToken: "",
-  expirationTime: "",
+  authData: {
+    accessToken: "",
+    refreshToken: "",
+    expirationTime: "",
+  },
 };
 
-const authReducer = (state = initialState, action) => {
+export const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case AuthActions.LOGIN_REQUEST:
       return {
@@ -18,7 +20,7 @@ const authReducer = (state = initialState, action) => {
     case AuthActions.LOGIN_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        authData: { ...action.payload },
         isLoggingIn: false,
         isLoggedIn: true,
       };
@@ -31,10 +33,22 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
+        authData: {
+          accessToken: "",
+          refreshToken: "",
+          expirationTime: "",
+        },
+      };
+    case AuthActions.DATA_REFRESH:
+      return {
+        ...state,
+        authData: {
+          accessToken: action.payload.accessToken,
+          refreshToken: action.payload.refreshToken,
+          expirationTime: action.payload.expirationTime,
+        },
       };
     default:
       return state;
   }
 };
-
-export default authReducer;

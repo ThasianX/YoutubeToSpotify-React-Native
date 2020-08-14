@@ -12,8 +12,12 @@ const ImageTextRow = (props) => {
           source={props.image == null ? emptyPlaylist : { uri: props.image }}
         />
         <View style={styles.textVStack}>
-          <Text style={styles.title}>{props.title}</Text>
-          <Text style={styles.subtitle}>{props.subtitle}</Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>
+            {props.title}
+          </Text>
+          <Text numberOfLines={1} ellipsizeMode="tail" style={styles.subtitle}>
+            {props.subtitle}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -22,8 +26,8 @@ const ImageTextRow = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 16,
-    paddingVertical: 8,
+    marginHorizontal: 16,
+    marginVertical: 8,
   },
   hStack: {
     flexDirection: "row",

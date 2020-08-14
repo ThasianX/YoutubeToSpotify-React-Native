@@ -23,12 +23,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logIn: () => {
-      dispatch(login());
-    },
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  logIn: () => {
+    dispatch(login());
+  },
+});
 
 export default connect(null, mapDispatchToProps)(LoginScreen);

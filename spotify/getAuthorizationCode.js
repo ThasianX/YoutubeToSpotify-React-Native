@@ -1,5 +1,5 @@
 import * as AuthSession from "expo-auth-session";
-import { getSpotifyCredentials } from "./getSpotifyCredentials";
+import { getSpotifyCredentials } from "./";
 
 const scopesArr = [
   "playlist-read-private",

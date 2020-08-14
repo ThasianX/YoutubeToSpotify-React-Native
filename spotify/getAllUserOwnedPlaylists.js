@@ -1,7 +1,7 @@
-import { getValidSPObj } from "../spotify/getValidSPObj";
+import { spotifyService } from "./";
 
-export const getAllUserOwnedPlaylists = async () => {
-  const sp = await getValidSPObj();
+export const getAllUserOwnedPlaylists = async (authData) => {
+  const sp = await spotifyService(authData);
   const { id: userId } = await sp.getMe();
   const { items: playlists } = await sp.getUserPlaylists(userId, {
     limit: 50,
