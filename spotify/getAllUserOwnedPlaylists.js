@@ -6,8 +6,16 @@ export const getAllUserOwnedPlaylists = async (authData) => {
   const { items: playlists } = await sp.getUserPlaylists(userId, {
     limit: 50,
   });
-  let userOwnedPlaylists = playlists.filter((playlist) => {
-    return playlist["owner"]["id"] === userId.toString();
-  });
+  const userOwnedPlaylists = playlists
+    .filter((playlist) => {
+      return playlist["owner"]["id"] === userId.toString();
+    })
+    .map((playlist) => ({
+      id: playlist["id"],
+      name: playlist["name"],
+      image:
+        playlist["images"].length > 0 ? playlist["images"][0]["url"] : null,
+      numOfTracks: playlist["tracks"]["total"],
+    }));
   return userOwnedPlaylists;
 };

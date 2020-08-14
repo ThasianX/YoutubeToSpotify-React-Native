@@ -26,17 +26,15 @@ export const getTracks = (trackName, artistName) => {
   return async (dispatch, getState) => {
     dispatch(requestTracks());
     try {
-      console.log(`old auth data: ${getAuthData(getState())}`);
       dispatch(refreshAuthData());
 
       const newAuthData = getAuthData(getState());
-      console.log(`new auth data: ${newAuthData}`);
-      const response = await getTracksForQuery(
+      const tracks = await getTracksForQuery(
         newAuthData,
         trackName,
         artistName
       );
-      dispatch(getTracksSuccess(response["tracks"]["items"]));
+      dispatch(getTracksSuccess(tracks));
     } catch (error) {
       console.error(error);
       dispatch(getTracksFailure());

@@ -15,7 +15,6 @@ export const refreshAuthData = () => {
     const tokenExpirationTime = authData.expirationTime;
 
     if (new Date().getTime() > Number(tokenExpirationTime)) {
-      console.log("CALLED");
       let refreshedAuthData = await refreshTokens(authData);
       dispatch(refreshData(refreshedAuthData));
     }

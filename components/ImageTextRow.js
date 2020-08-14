@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   textVStack: {
     justifyContent: "center",
     paddingLeft: 8,
+    paddingRight: 64,
   },
   title: {
     fontSize: 14,

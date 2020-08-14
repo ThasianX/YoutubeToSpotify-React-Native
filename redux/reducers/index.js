@@ -5,9 +5,9 @@ import { tracksReducer } from "./tracksReducer";
 import { playlistsReducer } from "./playlistsReducer";
 
 const rootReducer = combineReducers({
-  authReducer,
-  tracksReducer,
-  playlistsReducer,
+  authReducer: authReducer,
+  tracksReducer: tracksReducer,
+  playlistsReducer: playlistsReducer,
 });
 
 export default rootReducer;

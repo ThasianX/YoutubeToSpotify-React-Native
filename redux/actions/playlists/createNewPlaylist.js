@@ -4,10 +4,13 @@ import { getAuthData } from "../../../utils";
 
 export const createPlaylist = (playlistName) => {
   return async (dispatch, getState) => {
-    const response = createNewPlaylist(getAuthData(getState()), playlistName);
+    const newPlaylist = await createNewPlaylist(
+      getAuthData(getState()),
+      playlistName
+    );
 
-    if (response["error"] == null) {
-      dispatch(addTrackToSpotifyPlaylist(response));
+    if (newPlaylist != null) {
+      dispatch(addTrackToSpotifyPlaylist(newPlaylist));
     }
   };
 };

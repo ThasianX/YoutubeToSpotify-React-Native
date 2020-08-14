@@ -14,22 +14,22 @@ const showAlert = (alert) => ({
 
 export const addTrackToSpotifyPlaylist = (playlist) => {
   return async (dispatch, getState) => {
-    let response = await addTrackToPlaylist(
+    let success = await addTrackToPlaylist(
       getAuthData(getState()),
-      getSelectedTrack(getState())["uri"],
-      playlist["id"]
+      getSelectedTrack(getState()).uri,
+      playlist.id
     );
 
     let alert;
-    if (response["error"] == null) {
+    if (success) {
       alert = {
         image: checkmark,
-        message: `Added to ${playlist["name"]}.`,
+        message: `Added to ${playlist.name}.`,
       };
     } else {
       alert = {
         image: cross,
-        message: `Failed adding to ${playlist["name"]}.`,
+        message: `Failed adding to ${playlist.name}.`,
       };
     }
 

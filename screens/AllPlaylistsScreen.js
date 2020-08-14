@@ -18,12 +18,14 @@ import {
   hidePlaylists,
 } from "../redux/actions";
 
-const screenHeight = Dimensions.get("window").height;
+const closedOffset = Dimensions.get("window").height;
+const openOffset = 54;
 
 // TODO: reset scroll state everytime this view is dismissed
+// TODO: add modal swipe to this
 class AllPlaylistsScreen extends React.Component {
   state = {
-    modalOffset: new Animated.Value(screenHeight),
+    modalOffset: new Animated.Value(closedOffset),
     isShowingNewPlaylistAlert: false,
   };
 
@@ -31,7 +33,6 @@ class AllPlaylistsScreen extends React.Component {
     this.toggleModal();
   }
 
-  // TODO: figure out if toggle modal is being called twice here
   componentDidUpdate(prevProps) {
     if (this.props.show !== prevProps.show) {
       this.toggleModal(this.props.show);
@@ -41,12 +42,12 @@ class AllPlaylistsScreen extends React.Component {
   toggleModal = (show) => {
     if (show) {
       Animated.spring(this.state.modalOffset, {
-        toValue: 54,
+        toValue: openOffset,
         useNativeDriver: true,
       }).start();
     } else {
       Animated.spring(this.state.modalOffset, {
-        toValue: screenHeight,
+        toValue: closedOffset,
         useNativeDriver: true,
       }).start();
     }
@@ -70,7 +71,6 @@ class AllPlaylistsScreen extends React.Component {
   };
 
   // TODO: Add blur effect to the header
-  // TODO: Scrollview can't fully scroll to bottom
   render() {
     return (
       <Animated.View
@@ -112,14 +112,10 @@ class AllPlaylistsScreen extends React.Component {
               this.props.playlists.map((playlist) => {
                 return (
                   <ImageTextRow
-                    key={playlist["id"]}
-                    title={playlist["name"]}
-                    subtitle={`${playlist["tracks"]["total"]} songs`}
-                    image={
-                      playlist["images"].length > 0
-                        ? playlist["images"][0]["url"]
-                        : null
-                    }
+                    key={playlist.id}
+                    title={playlist.name}
+                    subtitle={`${playlist.numOfTracks} songs`}
+                    image={playlist.image}
                     onPress={() => this.props.playlistSelected(playlist)}
                   />
                 );
@@ -167,6 +163,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 12,
     backgroundColor: "#121212",
+    paddingBottom: openOffset,
   },
   showNewPlaylistButton: {
     alignSelf: "center",

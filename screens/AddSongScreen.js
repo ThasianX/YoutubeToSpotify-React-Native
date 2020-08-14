@@ -91,16 +91,10 @@ class AddSongScreen extends React.Component {
             this.props.spotifyTracks.map((track) => {
               return (
                 <ImageTextRow
-                  key={track["id"]}
-                  image={
-                    track["album"]["images"].length > 0
-                      ? track["album"]["images"][0]["url"]
-                      : null
-                  }
-                  title={track["name"]}
-                  subtitle={`${track["artists"]
-                    .map((artist) => artist["name"])
-                    .join(", ")} • ${track["album"]["name"]}`}
+                  key={track.id}
+                  image={track.image}
+                  title={track.name}
+                  subtitle={track.artists}
                   onPress={() => this.props.setSelectedTrack(track)}
                 />
               );

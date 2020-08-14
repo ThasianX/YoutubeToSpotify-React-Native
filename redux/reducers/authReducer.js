@@ -42,11 +42,7 @@ export const authReducer = (state = initialState, action) => {
     case AuthActions.DATA_REFRESH:
       return {
         ...state,
-        authData: {
-          accessToken: action.payload.accessToken,
-          refreshToken: action.payload.refreshToken,
-          expirationTime: action.payload.expirationTime,
-        },
+        authData: { ...action.payload },
       };
     default:
       return state;

@@ -1,7 +1,6 @@
 import { getAllUserOwnedPlaylists } from "../../../spotify";
 import { getAuthData } from "../../../utils";
 import { TrackActions, PlaylistActions } from "../../actionTypes";
-import { refreshAuthData } from "../auth";
 
 const requestUserPlaylists = () => ({
   type: PlaylistActions.GET_USER_PLAYLISTS_REQUEST,
