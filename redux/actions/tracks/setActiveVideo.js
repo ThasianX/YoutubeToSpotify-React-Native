@@ -1,4 +1,6 @@
 import { TrackActions } from "../../actionTypes";
+import { getYoutubeCredentials } from "../../../youtube";
+import { nFormatter } from "../../../utils";
 
 const setActiveVideoDetails = (videoDetails) => {
   return {
@@ -8,12 +10,24 @@ const setActiveVideoDetails = (videoDetails) => {
 };
 
 export const setActiveVideo = (videoId) => {
-  return setActiveVideoDetails(mockVideoDetails);
-};
+  return async (dispatch) => {
+    const credentials = await getYoutubeCredentials();
+    const response = await fetch(
+      `https://www.googleapis.com/youtube/v3/videos?part=snippet%2Cstatistics&id=${videoId}&key=${credentials.apiKey}`
+    );
+    const json = await response.json();
+    const snippet = json["items"][0]["snippet"];
+    const statistics = json["items"][0]["statistics"];
 
-const mockVideoDetails = {
-  title: "Lean Wit Me",
-  channelTitle: "Juice WRLD",
-  info: "209K Likes • 34,664,786 views",
-  thumbnail: "http://i3.ytimg.com/vi/WsrVxz4pjGs/maxresdefault.jpg",
+    dispatch(
+      setActiveVideoDetails({
+        title: snippet["title"],
+        channelTitle: snippet["channelTitle"],
+        info: `${nFormatter(
+          Number(statistics["likeCount"])
+        )} Likes • ${nFormatter(Number(statistics["viewCount"]))} views`,
+        thumbnail: snippet["thumbnails"]["medium"]["url"],
+      })
+    );
+  };
 };

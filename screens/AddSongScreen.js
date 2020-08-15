@@ -33,7 +33,7 @@ class AddSongScreen extends React.Component {
       opacity: new Animated.Value(1),
       scrollEnabled: true,
     };
-    this.props.setActiveVideo("");
+    this.props.setActiveVideo("zM_VDzbs3pY");
   }
 
   componentDidUpdate(prevProps) {
@@ -135,6 +135,7 @@ class AddSongScreen extends React.Component {
           >
             {(this.props.selectedQuery != null && <QuerySelection />) ||
               (!this.props.isLoading &&
+                // TODO: add empty state
                 this.props.spotifyTracks.map((track) => {
                   return (
                     <ImageTextRow
@@ -195,9 +196,10 @@ const styles = StyleSheet.create({
   trackTitle: {
     fontWeight: "bold",
     color: "#fff",
-    fontSize: 26,
+    fontSize: 20,
     paddingTop: 20,
     paddingHorizontal: 16,
+    textAlign: "center",
   },
   trackInfo: {
     color: "#b9bdbe",
