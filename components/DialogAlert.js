@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
       ios: {
         backgroundColor: "#242225",
         borderRadius: 10,
-        minWidth: 240,
+        width: 240,
+        height: 150,
       },
       android: {
         backgroundColor: "#242225",
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderTopWidth: 1,
         borderColor: "#3B393D",
-        maxHeight: 40,
+        height: 40,
       },
       android: {
         alignSelf: "flex-end",

@@ -6,7 +6,7 @@ export const getTracksForQuery = async (authData, trackName, artistName) => {
   const trackQuery = `track:${trackName}`;
   const artistQuery = artistName.length > 0 ? `artist:${artistName}` : "";
   const query = `${trackQuery} ${artistQuery}`;
-  const tracks = await sp.searchTracks(query, { limit: 5 });
+  const tracks = await sp.searchTracks(query, { limit: 15 });
 
   return tracks["tracks"]["items"].map((track) => ({
     id: track["id"],

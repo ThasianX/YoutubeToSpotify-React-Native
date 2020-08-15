@@ -15,10 +15,7 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const store = createStore(
-  persistedReducer,
-  applyMiddleware(thunk, createLogger())
-);
+const store = createStore(rootReducer, applyMiddleware(thunk, createLogger()));
 
 let persistor = persistStore(store);
 

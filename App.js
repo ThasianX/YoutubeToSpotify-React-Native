@@ -7,9 +7,9 @@ import HomeScreen from "./screens/HomeScreen";
 export default function App() {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <HomeScreen />
-      </PersistGate>
+      {/* <PersistGate loading={null} persistor={persistor}> */}
+      <HomeScreen />
+      {/* </PersistGate> */}
     </Provider>
   );
 }

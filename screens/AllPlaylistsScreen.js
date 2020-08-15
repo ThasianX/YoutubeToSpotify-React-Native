@@ -82,7 +82,7 @@ class AllPlaylistsScreen extends React.Component {
         <DialogAlert
           isDialogVisible={this.state.isShowingNewPlaylistAlert}
           initialInputText={
-            this.props.track != null ? this.props.track.title : ""
+            this.props.track != null ? this.props.track.name : ""
           }
           submitInput={this.createNewPlaylist}
           closeDialog={this.closeNewPlaylistAlert}
@@ -175,6 +175,7 @@ const styles = StyleSheet.create({
 mapStateToProps = (state) => ({
   show: state.tracksReducer.isShowingPlaylists,
   playlists: state.playlistsReducer.playlists,
+  track: state.tracksReducer.selectedSpotifyTrack,
 });
 
 mapDispatchToProps = (dispatch) => ({

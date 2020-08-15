@@ -1,7 +1,12 @@
 import { TrackActions } from "../../actionTypes";
 import { getTracksForQuery } from "../../../spotify";
 import { refreshAuthData } from "../auth";
-import { getAuthData } from "../../../utils";
+import {
+  getAuthData,
+  getKeywordQuery,
+  getTrackKeywords,
+  getArtistKeywords,
+} from "../../../utils";
 
 const requestTracks = () => {
   return {
@@ -22,13 +27,16 @@ const getTracksFailure = () => {
   };
 };
 
-export const getTracks = (trackName, artistName) => {
+export const getTracks = () => {
   return async (dispatch, getState) => {
     dispatch(requestTracks());
     try {
       // // dispatch(refreshAuthData());
 
       const newAuthData = getAuthData(getState());
+      const trackName = getKeywordQuery(getTrackKeywords(getState()));
+      const artistName = getKeywordQuery(getArtistKeywords(getState()));
+
       const tracks = await getTracksForQuery(
         newAuthData,
         trackName,

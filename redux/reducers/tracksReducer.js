@@ -34,6 +34,7 @@ export const tracksReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoadingTracks: true,
+        selectedQuery: null,
       };
     case TrackActions.GET_TRACKS_SUCCESS:
       return {
@@ -62,6 +63,7 @@ export const tracksReducer = (state = initialState, action) => {
       return {
         ...state,
         videoDetails: action.payload,
+        selectedQuery: "track",
         trackKeywords: parseKeywords(action.payload, "track"),
         artistKeywords: parseKeywords(action.payload, "artist"),
       };
@@ -94,11 +96,6 @@ export const tracksReducer = (state = initialState, action) => {
           artistKeywords: action.payload,
         };
       }
-    case TrackActions.FINALIZE_QUERY:
-      return {
-        ...state,
-        selectedQuery: null,
-      };
     default:
       return state;
   }

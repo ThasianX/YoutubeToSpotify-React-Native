@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, Image, Text, View, Animated } from "react-native";
+import {
+  StyleSheet,
+  Image,
+  Text,
+  View,
+  Animated,
+  ScrollView,
+  Dimensions,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import AllPlaylistsScreen from "./AllPlaylistsScreen";
 import RoundedButton from "../components/RoundedButton";
@@ -10,17 +18,20 @@ import {
   setSelectedTrack,
   resetAlert,
   startQuery,
-  finalizeQuery,
 } from "../redux/actions";
 import { connect } from "react-redux";
 import ImageTextRow from "../components/ImageTextRow";
 import QuerySelection from "../components/QuerySelection";
+import { getKeywordQuery } from "../utils";
+
+const screenHeight = Dimensions.get("window").height;
 class AddSongScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       opacity: new Animated.Value(1),
+      scrollEnabled: true,
     };
     this.props.setActiveVideo("");
   }
@@ -47,15 +58,7 @@ class AddSongScreen extends React.Component {
   };
 
   joinedQueryString = (keywords) => {
-    const queryString = keywords
-      .map((wordCategory) => {
-        return wordCategory
-          .filter((keyword) => keyword.isSelected)
-          .map((keyword) => keyword.word)
-          .join(" ");
-      })
-      .join(" ")
-      .trim();
+    const queryString = getKeywordQuery(keywords);
     return queryString !== "" ? queryString : "Configure";
   };
 
@@ -63,8 +66,13 @@ class AddSongScreen extends React.Component {
     if (this.props.selectedQuery == null) {
       return false;
     }
-
     return this.props.selectedQuery !== queryType;
+  };
+
+  onContentSizeChange = (contentWidth, contentHeight) => {
+    this.setState({
+      scrollEnabled: contentHeight > screenHeight,
+    });
   };
 
   // TODO: Maybe add some sort of indicator as its loading
@@ -120,19 +128,25 @@ class AddSongScreen extends React.Component {
           )}
         </Animated.View>
         <View style={styles.list}>
-          {(this.props.selectedQuery != null && <QuerySelection />) ||
-            (!this.props.isLoading &&
-              this.props.spotifyTracks.map((track) => {
-                return (
-                  <ImageTextRow
-                    key={track.id}
-                    image={track.image}
-                    title={track.name}
-                    subtitle={track.artists}
-                    onPress={() => this.props.setSelectedTrack(track)}
-                  />
-                );
-              }))}
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={this.state.scrollEnabled}
+            onContentSizeChange={this.onContentSizeChange}
+          >
+            {(this.props.selectedQuery != null && <QuerySelection />) ||
+              (!this.props.isLoading &&
+                this.props.spotifyTracks.map((track) => {
+                  return (
+                    <ImageTextRow
+                      key={track.id}
+                      image={track.image}
+                      title={track.name}
+                      subtitle={track.artists}
+                      onPress={() => this.props.setSelectedTrack(track)}
+                    />
+                  );
+                }))}
+          </ScrollView>
         </View>
       </View>
     );
@@ -238,15 +252,12 @@ const mapDispatchToProps = (dispatch) => ({
   setActiveVideo: (videoId) => {
     dispatch(setActiveVideo(videoId));
   },
-  getTracks: (trackKeywords, artistKeywords) => {
-    dispatch(getTracks(trackKeywords, artistKeywords));
-  },
   setSelectedTrack: (track) => {
     dispatch(setSelectedTrack(track));
   },
   resetAlert: () => dispatch(resetAlert()),
   startQuery: (queryType) => dispatch(startQuery(queryType)),
-  finalizeQuery: () => dispatch(finalizeQuery()),
+  finalizeQuery: () => dispatch(getTracks()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddSongScreen);

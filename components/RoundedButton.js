@@ -12,13 +12,15 @@ const RoundedButton = (props) => {
     >
       <View style={styles.container}>
         <Text style={styles.titleText}>{props.title.toUpperCase()}</Text>
-        <Text
-          numberOfLines={2}
-          ellipsizeMode={"tail"}
-          style={styles.subtitleText}
-        >
-          {props.subtitle}
-        </Text>
+        {props.subtitle != null && (
+          <Text
+            numberOfLines={2}
+            ellipsizeMode={"tail"}
+            style={styles.subtitleText}
+          >
+            {props.subtitle}
+          </Text>
+        )}
       </View>
     </TouchableOpacity>
   );
