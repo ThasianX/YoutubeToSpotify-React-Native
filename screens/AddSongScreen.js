@@ -33,7 +33,7 @@ class AddSongScreen extends React.Component {
       opacity: new Animated.Value(1),
       scrollEnabled: true,
     };
-    this.props.setActiveVideo("zM_VDzbs3pY");
+    this.props.setActiveVideo("axRAL0BXNvw");
   }
 
   componentDidUpdate(prevProps) {

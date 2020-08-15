@@ -13,13 +13,13 @@ const initialState = {
 };
 
 const parseKeywords = (videoDetails, queryType) => {
-  const videoTitleKeywords = videoDetails.title.split(" ").map((word) => ({
+  const videoTitleKeywords = videoDetails.title.match(/\w+/g).map((word) => ({
     word: word,
     isSelected: queryType === "track",
     color: "#e52d27",
   }));
   const channelTitleKeywords = videoDetails.channelTitle
-    .split(" ")
+    .match(/\w+/g)
     .map((word) => ({
       word: word,
       isSelected: queryType === "artist",
