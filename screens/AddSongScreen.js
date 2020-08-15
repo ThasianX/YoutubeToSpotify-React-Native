@@ -24,13 +24,15 @@ import ImageTextRow from "../components/ImageTextRow";
 import QuerySelection from "../components/QuerySelection";
 import { getKeywordQuery } from "../utils";
 
-const screenHeight = Dimensions.get("window").height;
+const windowHeight = Dimensions.get("window").height;
+
 class AddSongScreen extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       opacity: new Animated.Value(1),
+      scrollEnabled: false,
     };
     this.props.setActiveVideo("axRAL0BXNvw");
   }
@@ -66,6 +68,37 @@ class AddSongScreen extends React.Component {
       return false;
     }
     return this.props.selectedQuery !== queryType;
+  };
+
+  spotifyTrackRows = () => {
+    return this.props.spotifyTracks.map((track) => {
+      return (
+        <ImageTextRow
+          key={track.id}
+          image={track.image}
+          title={track.name}
+          subtitle={track.artists}
+          onPress={() => this.props.setSelectedTrack(track)}
+        />
+      );
+    });
+  };
+
+  emptySpotifyTracksView = () => {
+    let trackQuery = getKeywordQuery(this.props.trackKeywords);
+    return (
+      <View style={styles.emptyStateContainer}>
+        <Text style={styles.emptyStateHeaderText}>{"Couldn't find"}</Text>
+        <Text style={styles.emptyStateSearchText}>{`"${trackQuery}"`}</Text>
+        <Text style={styles.emptyStateTipsText}>
+          {"Try searching again using a different set of keywords."}
+        </Text>
+      </View>
+    );
+  };
+
+  onContentSizeChange = (contentWidth, contentHeight) => {
+    this.setState({ scrollEnabled: contentHeight > (windowHeight * 5) / 11 });
   };
 
   // TODO: Maybe add some sort of indicator as its loading
@@ -121,21 +154,16 @@ class AddSongScreen extends React.Component {
           )}
         </Animated.View>
         <View style={styles.list}>
-          <ScrollView showsVerticalScrollIndicator={false}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={this.state.scrollEnabled}
+            onContentSizeChange={this.onContentSizeChange}
+          >
             {(this.props.selectedQuery != null && <QuerySelection />) ||
               (!this.props.isLoading &&
-                // TODO: add empty state
-                this.props.spotifyTracks.map((track) => {
-                  return (
-                    <ImageTextRow
-                      key={track.id}
-                      image={track.image}
-                      title={track.name}
-                      subtitle={track.artists}
-                      onPress={() => this.props.setSelectedTrack(track)}
-                    />
-                  );
-                }))}
+                (this.props.spotifyTracks.length > 0
+                  ? this.spotifyTrackRows()
+                  : this.emptySpotifyTracksView()))}
           </ScrollView>
         </View>
       </View>
@@ -149,7 +177,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#121212",
   },
   header: {
-    flex: 1.2,
+    flex: 6,
   },
   headerBackground: {
     width: "100%",
@@ -211,20 +239,32 @@ const styles = StyleSheet.create({
     letterSpacing: 2,
   },
   list: {
-    flex: 1,
+    flex: 5,
     backgroundColor: "#121212",
   },
-  playlistItem: {
-    marginLeft: 25,
-    marginBottom: 25,
+  emptyStateContainer: {
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "75%",
   },
-  playlistItemTitle: {
-    fontSize: 18,
-    color: "#fff",
+  emptyStateHeaderText: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "white",
   },
-  playlistItemMeta: {
-    color: "#b9bdbe",
-    fontSize: 15,
+  emptyStateSearchText: {
+    fontSize: 16,
+    fontWeight: "600",
+    paddingHorizontal: 24,
+    color: "white",
+    textAlign: "center",
+    paddingBottom: 16,
+  },
+  emptyStateTipsText: {
+    fontSize: 12,
+    color: "gray",
+    textAlign: "center",
   },
 });
 
