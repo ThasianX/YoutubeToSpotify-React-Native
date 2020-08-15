@@ -26,7 +26,7 @@ export const getTracks = (trackName, artistName) => {
   return async (dispatch, getState) => {
     dispatch(requestTracks());
     try {
-      dispatch(refreshAuthData());
+      // // dispatch(refreshAuthData());
 
       const newAuthData = getAuthData(getState());
       const tracks = await getTracksForQuery(

@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  ScrollView,
-  FlatList,
-  TouchableOpacity,
-  Image,
-  Text,
-  View,
-  Animated,
-} from "react-native";
+import { StyleSheet, Image, Text, View, Animated } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import AllPlaylistsScreen from "./AllPlaylistsScreen";
 import RoundedButton from "../components/RoundedButton";
@@ -18,9 +9,12 @@ import {
   setActiveVideo,
   setSelectedTrack,
   resetAlert,
+  startQuery,
+  finalizeQuery,
 } from "../redux/actions";
 import { connect } from "react-redux";
 import ImageTextRow from "../components/ImageTextRow";
+import QuerySelection from "../components/QuerySelection";
 class AddSongScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -29,13 +23,6 @@ class AddSongScreen extends React.Component {
       opacity: new Animated.Value(1),
     };
     this.props.setActiveVideo("");
-  }
-
-  componentDidMount() {
-    // this.props.getTracks(
-    //   this.props.trackKeywords.join(" "),
-    //   this.props.artistKeywords.join(" ")
-    // );
   }
 
   componentDidUpdate(prevProps) {
@@ -47,9 +34,40 @@ class AddSongScreen extends React.Component {
     }
   }
 
-  // TODO: Reconfigure the search query view. Make it have like 2 different buttons(track and artist)
+  queryPressed = (queryType) => {
+    if (queryType === this.props.selectedQuery) {
+      this.props.finalizeQuery();
+    } else {
+      this.props.startQuery(queryType);
+    }
+  };
+
+  queryTitle = (queryType) => {
+    return this.props.selectedQuery === queryType ? "done" : queryType;
+  };
+
+  joinedQueryString = (keywords) => {
+    const queryString = keywords
+      .map((wordCategory) => {
+        return wordCategory
+          .filter((keyword) => keyword.isSelected)
+          .map((keyword) => keyword.word)
+          .join(" ");
+      })
+      .join(" ")
+      .trim();
+    return queryString !== "" ? queryString : "Configure";
+  };
+
+  isQueryDisabled = (queryType) => {
+    if (this.props.selectedQuery == null) {
+      return false;
+    }
+
+    return this.props.selectedQuery !== queryType;
+  };
+
   // TODO: Maybe add some sort of indicator as its loading
-  // TODO: Everything works but the transient alert isn't going away after it shows
   render() {
     return (
       <View style={[styles.container]}>
@@ -76,36 +94,45 @@ class AddSongScreen extends React.Component {
                   resizeMode="cover"
                 />
               </View>
-              <Text style={styles.trackTitle}>
+              <Text
+                style={styles.trackTitle}
+                numberOfLines={2}
+                ellipsizeMode={"tail"}
+              >
                 {this.props.videoDetails.title}
               </Text>
               <Text style={styles.trackInfo}>
                 {this.props.videoDetails.info}
               </Text>
               <RoundedButton
-                title={"TRACK"}
-                subtitle={this.props.trackKeywords.join(" ")}
+                title={this.queryTitle("track")}
+                subtitle={this.joinedQueryString(this.props.trackKeywords)}
+                isDisabled={this.isQueryDisabled("track")}
+                onPress={() => this.queryPressed("track")}
               />
               <RoundedButton
-                title={"ARTIST"}
-                subtitle={this.props.artistKeywords.join(" ")}
+                title={this.queryTitle("artist")}
+                subtitle={this.joinedQueryString(this.props.artistKeywords)}
+                isDisabled={this.isQueryDisabled("artist")}
+                onPress={() => this.queryPressed("artist")}
               />
             </View>
           )}
         </Animated.View>
         <View style={styles.list}>
-          {!this.props.isLoading &&
-            this.props.spotifyTracks.map((track) => {
-              return (
-                <ImageTextRow
-                  key={track.id}
-                  image={track.image}
-                  title={track.name}
-                  subtitle={track.artists}
-                  onPress={() => this.props.setSelectedTrack(track)}
-                />
-              );
-            })}
+          {(this.props.selectedQuery != null && <QuerySelection />) ||
+            (!this.props.isLoading &&
+              this.props.spotifyTracks.map((track) => {
+                return (
+                  <ImageTextRow
+                    key={track.id}
+                    image={track.image}
+                    title={track.name}
+                    subtitle={track.artists}
+                    onPress={() => this.props.setSelectedTrack(track)}
+                  />
+                );
+              }))}
         </View>
       </View>
     );
@@ -154,8 +181,9 @@ const styles = StyleSheet.create({
   trackTitle: {
     fontWeight: "bold",
     color: "#fff",
-    fontSize: 30,
+    fontSize: 26,
     paddingTop: 20,
+    paddingHorizontal: 16,
   },
   trackInfo: {
     color: "#b9bdbe",
@@ -203,6 +231,7 @@ const mapStateToProps = (state) => ({
   artistKeywords: state.tracksReducer.artistKeywords,
   isShowingPlaylists: state.tracksReducer.isShowingPlaylists,
   alert: state.tracksReducer.alert,
+  selectedQuery: state.tracksReducer.selectedQuery,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -216,6 +245,8 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(setSelectedTrack(track));
   },
   resetAlert: () => dispatch(resetAlert()),
+  startQuery: (queryType) => dispatch(startQuery(queryType)),
+  finalizeQuery: () => dispatch(finalizeQuery()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddSongScreen);

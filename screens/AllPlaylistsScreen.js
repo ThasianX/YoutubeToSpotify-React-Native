@@ -91,6 +91,7 @@ class AllPlaylistsScreen extends React.Component {
           <View style={styles.center}>
             <View style={styles.leftAlignedCancelButton}>
               <TouchableOpacity
+                activeOpacity={0.7}
                 onPress={this.props.onBack}
                 hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
               >

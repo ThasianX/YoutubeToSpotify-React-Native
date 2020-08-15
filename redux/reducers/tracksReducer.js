@@ -7,8 +7,25 @@ const initialState = {
   selectedSpotifyTrack: null,
   isShowingPlaylists: false,
   alert: null,
-  trackKeywords: ["Lean", "Wit", "Me"],
-  artistKeywords: ["Juice", "WRLD"],
+  selectedQuery: null,
+  trackKeywords: [],
+  artistKeywords: [],
+};
+
+const parseKeywords = (videoDetails, queryType) => {
+  const videoTitleKeywords = videoDetails.title.split(" ").map((word) => ({
+    word: word,
+    isSelected: queryType === "track",
+    color: "#e52d27",
+  }));
+  const channelTitleKeywords = videoDetails.channelTitle
+    .split(" ")
+    .map((word) => ({
+      word: word,
+      isSelected: queryType === "artist",
+      color: "#b31217",
+    }));
+  return [videoTitleKeywords, channelTitleKeywords];
 };
 
 export const tracksReducer = (state = initialState, action) => {
@@ -45,6 +62,8 @@ export const tracksReducer = (state = initialState, action) => {
       return {
         ...state,
         videoDetails: action.payload,
+        trackKeywords: parseKeywords(action.payload, "track"),
+        artistKeywords: parseKeywords(action.payload, "artist"),
       };
     case TrackActions.ADD_TRACK_TO_PLAYLIST:
       return {
@@ -57,6 +76,28 @@ export const tracksReducer = (state = initialState, action) => {
       return {
         ...state,
         alert: null,
+      };
+    case TrackActions.START_QUERY:
+      return {
+        ...state,
+        selectedQuery: action.payload,
+      };
+    case TrackActions.UPDATE_QUERY:
+      if (state.selectedQuery == "track") {
+        return {
+          ...state,
+          trackKeywords: action.payload,
+        };
+      } else {
+        return {
+          ...state,
+          artistKeywords: action.payload,
+        };
+      }
+    case TrackActions.FINALIZE_QUERY:
+      return {
+        ...state,
+        selectedQuery: null,
       };
     default:
       return state;

@@ -5,7 +5,11 @@ import { emptyPlaylist } from "../utils/images";
 // TODO: should use `Pressable` API and make the background black when pressed
 const ImageTextRow = (props) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={props.onPress}>
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={styles.container}
+      onPress={props.onPress}
+    >
       <View style={styles.hStack}>
         <Image
           style={styles.image}
