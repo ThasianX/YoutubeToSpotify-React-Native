@@ -46,9 +46,6 @@ class QuerySelection extends React.Component {
   render() {
     return (
       <View style={styles.vStack}>
-        <Text style={styles.instructionText}>
-          {`${instructionText}${this.props.selectedQuery}`}
-        </Text>
         {this.props.queryWords.map((queryWordsCategory, category) => {
           return (
             <View
@@ -76,11 +73,6 @@ const styles = StyleSheet.create({
   vStack: {
     flex: 1,
     alignItems: "center",
-  },
-  instructionText: {
-    fontSize: 14,
-    color: "white",
-    paddingVertical: 16,
   },
   gridContainer: {
     flexDirection: "row",
