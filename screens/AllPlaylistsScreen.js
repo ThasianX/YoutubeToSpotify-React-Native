@@ -19,6 +19,7 @@ import {
   hidePlaylists,
 } from "../redux/actions";
 import { emptyPlaylist } from "../utils";
+import { BlurView } from "expo-blur";
 
 const closedOffset = Dimensions.get("window").height;
 const openOffset = 54;
@@ -117,7 +118,11 @@ class AllPlaylistsScreen extends React.Component {
               })}
           </View>
         </ScrollView>
-        <View style={styles.headerBackground}>
+        <BlurView
+          tint={"dark"}
+          intensity={100}
+          style={[StyleSheet.absoluteFill, styles.headerBackground]}
+        >
           <View style={styles.center}>
             <View style={styles.leftAlignedCancelButton}>
               <TouchableOpacity
@@ -130,7 +135,7 @@ class AllPlaylistsScreen extends React.Component {
             </View>
             <Text style={styles.headerText}>{"Add to Playlist"}</Text>
           </View>
-        </View>
+        </BlurView>
       </View>
     );
   };
