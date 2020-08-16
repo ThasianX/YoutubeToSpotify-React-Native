@@ -22,7 +22,6 @@ import { emptyPlaylist } from "../utils";
 const closedOffset = Dimensions.get("window").height;
 const openOffset = 54;
 
-// TODO: reset scroll state everytime this view is dismissed
 // TODO: add modal swipe to this
 class AllPlaylistsScreen extends React.Component {
   state = {
@@ -42,6 +41,10 @@ class AllPlaylistsScreen extends React.Component {
 
   toggleModal = (show) => {
     if (show) {
+      if (this.scrollView) {
+        this.scrollView.scrollTo({ x: 0, y: 0, animated: false });
+      }
+
       Animated.spring(this.state.modalOffset, {
         toValue: openOffset,
         useNativeDriver: true,
@@ -104,7 +107,11 @@ class AllPlaylistsScreen extends React.Component {
           </View>
         </View>
         <View style={styles.content}>
-          <ScrollView style={{ backgroundColor: "#121212" }}>
+          <ScrollView
+            ref={(ref) => {
+              this.scrollView = ref;
+            }}
+          >
             <View style={styles.showNewPlaylistButton}>
               <RoundedButton
                 title={"NEW PLAYLIST"}
