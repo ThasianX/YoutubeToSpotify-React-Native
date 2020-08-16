@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 14,
     color: "white",
     letterSpacing: 2,
   },

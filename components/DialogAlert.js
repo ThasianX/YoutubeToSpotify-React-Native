@@ -12,12 +12,12 @@ import {
 
 // https://github.com/joseestrella89/react-native-dialog-input/blob/master/index.js
 
-const entranceOffset = 75;
+const entranceOffset = 50;
 const stationaryOffset = 0;
-const entranceScale = 1.2;
+const entranceScale = 1.3;
 const stationaryScale = 1;
+const animationDuration = 250;
 
-const animationDuration = 300;
 class DialogAlert extends React.Component {
   constructor(props) {
     super(props);
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
       ios: {
         backgroundColor: "#242225",
         borderRadius: 10,
-        width: 240,
-        height: 150,
+        width: 260,
+        height: 160,
       },
       android: {
         backgroundColor: "#242225",
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   title_modal: {
     fontWeight: "600",
     color: "white",
-    fontSize: 15,
+    fontSize: 17,
     ...Platform.select({
       ios: {
         marginTop: 10,
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     }),
   },
   message_modal: {
-    fontSize: 11,
+    fontSize: 13,
     color: "white",
     ...Platform.select({
       ios: {
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
   },
   input_container: {
     textAlign: "left",
-    fontSize: 12,
+    fontSize: 13,
     color: "white",
     ...Platform.select({
       ios: {
@@ -235,7 +235,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderTopWidth: 1,
         borderColor: "#3B393D",
-        height: 40,
       },
       android: {
         alignSelf: "flex-end",
@@ -271,10 +270,10 @@ const styles = StyleSheet.create({
     }),
   },
   btn_modal_left: {
-    fontWeight: "600",
+    fontWeight: "bold",
     ...Platform.select({
       ios: {
-        fontSize: 15,
+        fontSize: 16,
         color: "#408AE2",
         textAlign: "center",
       },
@@ -286,9 +285,10 @@ const styles = StyleSheet.create({
     }),
   },
   btn_modal_right: {
+    fontWeight: "500",
     ...Platform.select({
       ios: {
-        fontSize: 15,
+        fontSize: 16,
         textAlign: "center",
       },
       android: {

@@ -39,23 +39,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   image: {
-    width: 45,
-    height: 45,
+    width: 48,
+    height: 48,
     resizeMode: "contain",
   },
   textVStack: {
     justifyContent: "center",
-    paddingLeft: 8,
-    paddingRight: 64,
+    flex: 1,
+    paddingLeft: 12,
   },
   title: {
-    fontSize: 14,
+    fontSize: 16,
     color: "white",
     paddingBottom: 4,
   },
   subtitle: {
-    fontSize: 10,
-    color: "gray",
+    fontSize: 13,
+    color: "#D3D3D3",
   },
 });
 

@@ -7,6 +7,7 @@ import {
   Dimensions,
   ScrollView,
   Animated,
+  Platform,
 } from "react-native";
 import ImageTextRow from "../components/ImageTextRow";
 import RoundedButton from "../components/RoundedButton";
@@ -21,10 +22,15 @@ import { emptyPlaylist } from "../utils";
 
 const closedOffset = Dimensions.get("window").height;
 const openOffset = 54;
+const HEADER_HEIGHT = 60;
 
 // TODO: add modal swipe to this
 class AllPlaylistsScreen extends React.Component {
   state = {
+    scrollY: new Animated.Value(
+      // iOS has negative initial scroll value because content inset...
+      Platform.OS === "ios" ? -HEADER_HEIGHT : 0
+    ),
     modalOffset: new Animated.Value(closedOffset),
     isShowingNewPlaylistAlert: false,
   };
@@ -42,7 +48,7 @@ class AllPlaylistsScreen extends React.Component {
   toggleModal = (show) => {
     if (show) {
       if (this.scrollView) {
-        this.scrollView.scrollTo({ x: 0, y: 0, animated: false });
+        this.scrollView.scrollTo({ x: 0, y: -HEADER_HEIGHT, animated: false });
       }
 
       Animated.spring(this.state.modalOffset, {
@@ -74,6 +80,61 @@ class AllPlaylistsScreen extends React.Component {
     });
   };
 
+  renderContent = () => {
+    return (
+      <View style={styles.content}>
+        <ScrollView
+          indicatorStyle={"white"}
+          contentInset={{ top: HEADER_HEIGHT }}
+          contentOffset={{
+            y: -HEADER_HEIGHT,
+          }}
+          ref={(ref) => {
+            this.scrollView = ref;
+          }}
+        >
+          <View style={styles.scrollViewContent}>
+            <View style={styles.showNewPlaylistButton}>
+              <RoundedButton
+                title={"NEW PLAYLIST"}
+                onPress={this.showNewPlaylistAlert}
+              />
+            </View>
+            {this.props.playlists.length > 0 &&
+              this.props.playlists.map((playlist) => {
+                return (
+                  <ImageTextRow
+                    key={playlist.id}
+                    title={playlist.name}
+                    subtitle={`${playlist.numOfTracks} ${
+                      playlist.numOfTracks == 1 ? "song" : "songs"
+                    }`}
+                    defaultImage={emptyPlaylist}
+                    image={playlist.image}
+                    onPress={() => this.props.playlistSelected(playlist)}
+                  />
+                );
+              })}
+          </View>
+        </ScrollView>
+        <View style={styles.headerBackground}>
+          <View style={styles.center}>
+            <View style={styles.leftAlignedCancelButton}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={this.props.onBack}
+                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
+              >
+                <Text style={styles.cancelButtonText}>{"Cancel"}</Text>
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.headerText}>{"Add to Playlist"}</Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
   // TODO: Add blur effect to the header
   render() {
     return (
@@ -92,48 +153,7 @@ class AllPlaylistsScreen extends React.Component {
             closeDialog={this.closeNewPlaylistAlert}
           />
         )}
-        <View style={styles.headerBackground}>
-          <View style={styles.center}>
-            <View style={styles.leftAlignedCancelButton}>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={this.props.onBack}
-                hitSlop={{ top: 20, left: 20, bottom: 20, right: 20 }}
-              >
-                <Text style={styles.cancelButtonText}>{"Cancel"}</Text>
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.headerText}>{"Add to Playlist"}</Text>
-          </View>
-        </View>
-        <View style={styles.content}>
-          <ScrollView
-            contentContainerStyle={styles.scrollView}
-            ref={(ref) => {
-              this.scrollView = ref;
-            }}
-          >
-            <View style={styles.showNewPlaylistButton}>
-              <RoundedButton
-                title={"NEW PLAYLIST"}
-                onPress={this.showNewPlaylistAlert}
-              />
-            </View>
-            {this.props.playlists.length > 0 &&
-              this.props.playlists.map((playlist) => {
-                return (
-                  <ImageTextRow
-                    key={playlist.id}
-                    title={playlist.name}
-                    subtitle={`${playlist.numOfTracks} songs`}
-                    defaultImage={emptyPlaylist}
-                    image={playlist.image}
-                    onPress={() => this.props.playlistSelected(playlist)}
-                  />
-                );
-              })}
-          </ScrollView>
-        </View>
+        {this.renderContent()}
       </Animated.View>
     );
   }
@@ -145,17 +165,21 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 2,
+    backgroundColor: "#121212",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     overflow: "hidden",
   },
   headerBackground: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
     backgroundColor: "#191919",
-    flex: 1,
-    justifyContent: "center",
-    alignContent: "center",
+    height: HEADER_HEIGHT,
   },
   center: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -164,25 +188,22 @@ const styles = StyleSheet.create({
     left: 20,
   },
   cancelButtonText: {
-    fontSize: 12,
+    fontSize: 13,
     color: "white",
   },
   headerText: {
-    fontWeight: "bold",
-    fontSize: 14,
+    fontWeight: "700",
+    fontSize: 16,
     color: "white",
   },
-  content: {
-    flex: 12,
-    backgroundColor: "#121212",
-    paddingBottom: openOffset,
-  },
-  scrollView: {
-    paddingBottom: 50,
+  scrollViewContent: {
+    flex: 1,
+    paddingBottom: openOffset + 50,
+    paddingTop: Platform.OS !== "ios" ? HEADER_HEIGHT : 0,
   },
   showNewPlaylistButton: {
     alignSelf: "center",
-    paddingVertical: 24,
+    paddingVertical: 14,
   },
 });
 
