@@ -108,6 +108,7 @@ class AllPlaylistsScreen extends React.Component {
         </View>
         <View style={styles.content}>
           <ScrollView
+            contentContainerStyle={styles.scrollView}
             ref={(ref) => {
               this.scrollView = ref;
             }}
@@ -175,6 +176,9 @@ const styles = StyleSheet.create({
     flex: 12,
     backgroundColor: "#121212",
     paddingBottom: openOffset,
+  },
+  scrollView: {
+    paddingBottom: 50,
   },
   showNewPlaylistButton: {
     alignSelf: "center",

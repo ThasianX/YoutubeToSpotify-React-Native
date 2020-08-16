@@ -12,17 +12,17 @@ const initialState = {
   artistKeywords: [],
 };
 
-const parseKeywords = (videoDetails, queryType) => {
+const parseKeywords = (videoDetails) => {
   const videoTitleKeywords = videoDetails.title.match(/\w+/g).map((word) => ({
     word: word,
-    isSelected: queryType === "track",
+    isSelected: false,
     color: "#e52d27",
   }));
   const channelTitleKeywords = videoDetails.channelTitle
     .match(/\w+/g)
     .map((word) => ({
       word: word,
-      isSelected: queryType === "artist",
+      isSelected: false,
       color: "#b31217",
     }));
   return [videoTitleKeywords, channelTitleKeywords];
@@ -60,12 +60,13 @@ export const tracksReducer = (state = initialState, action) => {
         selectedSpotifyTrack: null,
       };
     case TrackActions.SET_ACTIVE_VIDEO:
+      const initialKeywords = parseKeywords(action.payload);
       return {
         ...state,
         videoDetails: action.payload,
         selectedQuery: "track",
-        trackKeywords: parseKeywords(action.payload, "track"),
-        artistKeywords: parseKeywords(action.payload, "artist"),
+        trackKeywords: initialKeywords,
+        artistKeywords: initialKeywords,
       };
     case TrackActions.ADD_TRACK_TO_PLAYLIST:
       return {

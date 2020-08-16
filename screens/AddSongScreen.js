@@ -160,6 +160,7 @@ class AddSongScreen extends React.Component {
           </View>
           <View style={styles.list}>
             <ScrollView
+              contentContainerStyle={styles.scrollView}
               showsVerticalScrollIndicator={false}
               scrollEnabled={this.state.scrollEnabled}
               onContentSizeChange={this.onContentSizeChange}
@@ -247,6 +248,9 @@ const styles = StyleSheet.create({
   list: {
     flex: 5,
     backgroundColor: "#121212",
+  },
+  scrollView: {
+    paddingBottom: 50,
   },
   emptyStateContainer: {
     alignSelf: "center",
