@@ -17,6 +17,7 @@ import {
   addTrackToSpotifyPlaylist,
   hidePlaylists,
 } from "../redux/actions";
+import { emptyPlaylist } from "../utils";
 
 const closedOffset = Dimensions.get("window").height;
 const openOffset = 54;
@@ -116,6 +117,7 @@ class AllPlaylistsScreen extends React.Component {
                     key={playlist.id}
                     title={playlist.name}
                     subtitle={`${playlist.numOfTracks} songs`}
+                    defaultImage={emptyPlaylist}
                     image={playlist.image}
                     onPress={() => this.props.playlistSelected(playlist)}
                   />

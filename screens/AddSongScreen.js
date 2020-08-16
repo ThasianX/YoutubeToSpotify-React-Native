@@ -22,7 +22,7 @@ import {
 import { connect } from "react-redux";
 import ImageTextRow from "../components/ImageTextRow";
 import QuerySelection from "../components/QuerySelection";
-import { getKeywordQuery } from "../utils";
+import { getKeywordQuery, emptyTrack } from "../utils";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -78,6 +78,7 @@ class AddSongScreen extends React.Component {
           image={track.image}
           title={track.name}
           subtitle={track.artists}
+          defaultImage={emptyTrack}
           onPress={() => this.props.setSelectedTrack(track)}
         />
       );

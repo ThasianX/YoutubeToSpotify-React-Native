@@ -1,6 +1,5 @@
 import React from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
-import { emptyPlaylist } from "../utils/images";
 
 // TODO: should use `Pressable` API and make the background black when pressed
 const ImageTextRow = (props) => {
@@ -13,7 +12,10 @@ const ImageTextRow = (props) => {
       <View style={styles.hStack}>
         <Image
           style={styles.image}
-          source={props.image == null ? emptyPlaylist : { uri: props.image }}
+          defaultSource={props.defaultImage}
+          source={
+            props.image == null ? props.defaultImage : { uri: props.image }
+          }
         />
         <View style={styles.textVStack}>
           <Text numberOfLines={1} ellipsizeMode="tail" style={styles.title}>
