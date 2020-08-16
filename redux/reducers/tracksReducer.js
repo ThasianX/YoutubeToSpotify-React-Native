@@ -7,7 +7,7 @@ const initialState = {
   selectedSpotifyTrack: null,
   isShowingPlaylists: false,
   alert: null,
-  selectedQuery: null,
+  selectedQuery: "track",
   trackKeywords: [],
   artistKeywords: [],
 };
