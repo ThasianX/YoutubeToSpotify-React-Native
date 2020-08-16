@@ -27,7 +27,6 @@ export const login = () => {
       let tokens = await getTokens();
       dispatch(logInSuccess({ ...tokens }));
     } catch (error) {
-      console.error(error);
       dispatch(logInFailure());
     }
   };

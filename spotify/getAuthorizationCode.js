@@ -10,21 +10,21 @@ const scopesArr = [
 const scopes = scopesArr.join(" ");
 
 export const getAuthorizationCode = async () => {
-  let result;
-  try {
-    const credentials = await getSpotifyCredentials();
-    result = await AuthSession.startAsync({
-      authUrl:
-        "https://accounts.spotify.com/authorize" +
-        "?response_type=code" +
-        "&client_id=" +
-        credentials.clientId +
-        (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
-        "&redirect_uri=" +
-        encodeURIComponent(credentials.redirectUri),
-    });
-  } catch (err) {
-    throw `Error occurred while getting authorization code: ${err}`;
+  const credentials = await getSpotifyCredentials();
+  const result = await AuthSession.startAsync({
+    authUrl:
+      "https://accounts.spotify.com/authorize" +
+      "?response_type=code" +
+      "&client_id=" +
+      credentials.clientId +
+      (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
+      "&redirect_uri=" +
+      encodeURIComponent(credentials.redirectUri),
+  });
+
+  if (result["type"] === "success") {
+    return result.params["code"];
+  } else {
+    throw `Error occurred while getting authorization code`;
   }
-  return result.params["code"];
 };
