@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import {
   Modal,
   Platform,
@@ -7,54 +7,92 @@ import {
   TextInput,
   TouchableOpacity,
   View,
+  Animated,
 } from "react-native";
 
 // https://github.com/joseestrella89/react-native-dialog-input/blob/master/index.js
 
-// TODO: add the keyboard animation that spotify uses
-class DialogAlert extends React.Component {
-  state = {
-    inputText: "",
-  };
+const entranceOffset = 75;
+const stationaryOffset = 0;
+const entranceScale = 1.2;
+const stationaryScale = 1;
 
-  handleOnRequestClose = () => {
-    this.props.closeDialog();
-  };
+const animationDuration = 300;
+class DialogAlert extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      inputText: this.props.initialInputText,
+      opacity: new Animated.Value(0),
+      scale: new Animated.Value(entranceScale),
+      offset: new Animated.Value(entranceOffset),
+    };
+  }
+
+  componentDidMount() {
+    Animated.timing(this.state.offset, {
+      toValue: stationaryOffset,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
+    Animated.timing(this.state.opacity, {
+      toValue: 1,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
+    Animated.timing(this.state.scale, {
+      toValue: stationaryScale,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
+  }
 
   handleOnChangeText = (text) => {
     this.setState({ inputText: text });
   };
 
   handleOnCloseDialog = () => {
-    this.props.closeDialog();
+    this.closeDialog(() => this.props.closeDialog());
   };
 
   handleSubmit = () => {
-    this.props.submitInput(this.state.inputText);
+    this.closeDialog(() => this.props.submitInput(this.state.inputText));
+  };
+
+  closeDialog = (action) => {
+    Animated.timing(this.state.opacity, {
+      toValue: 0,
+      duration: animationDuration,
+      useNativeDriver: true,
+    }).start();
+    action();
   };
 
   isTextInputBlank = () => {
     return this.state.inputText.length > 0;
   };
 
-  componentDidUpdate(prevProps) {
-    if (this.props.initialInputText != prevProps.initialInputText) {
-      this.setState({
-        inputText: this.props.initialInputText,
-      });
-    }
-  }
-
   render() {
     return (
       <Modal
         animationType={"fade"}
         transparent={true}
-        visible={this.props.isDialogVisible}
         onRequestClose={this.handleOnRequestClose}
       >
-        <View style={[styles.container]}>
-          <View style={styles.modal_container}>
+        <View style={styles.container}>
+          <Animated.View
+            style={[
+              styles.modal_container,
+              {
+                opacity: this.state.opacity,
+                transform: [
+                  { scale: this.state.scale },
+                  { translateY: this.state.offset },
+                ],
+              },
+            ]}
+          >
             <View style={styles.modal_body}>
               <Text style={styles.title_modal}>{"Create New Playlist"}</Text>
               <Text style={styles.message_modal}>
@@ -76,7 +114,7 @@ class DialogAlert extends React.Component {
               >
                 <Text style={styles.btn_modal_left}>{"Cancel"}</Text>
               </TouchableOpacity>
-              <View style={styles.divider_btn}></View>
+              <View style={styles.divider_btn} />
               <TouchableOpacity
                 style={[styles.touch_modal]}
                 disabled={!this.isTextInputBlank()}
@@ -94,7 +132,7 @@ class DialogAlert extends React.Component {
                 </Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </Animated.View>
         </View>
       </Modal>
     );

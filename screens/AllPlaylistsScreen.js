@@ -17,6 +17,7 @@ import {
   addTrackToSpotifyPlaylist,
   hidePlaylists,
 } from "../redux/actions";
+import { emptyPlaylist } from "../utils";
 
 const closedOffset = Dimensions.get("window").height;
 const openOffset = 54;
@@ -79,14 +80,15 @@ class AllPlaylistsScreen extends React.Component {
           { transform: [{ translateY: this.state.modalOffset }] },
         ]}
       >
-        <DialogAlert
-          isDialogVisible={this.state.isShowingNewPlaylistAlert}
-          initialInputText={
-            this.props.track != null ? this.props.track.name : ""
-          }
-          submitInput={this.createNewPlaylist}
-          closeDialog={this.closeNewPlaylistAlert}
-        />
+        {this.state.isShowingNewPlaylistAlert && (
+          <DialogAlert
+            initialInputText={
+              this.props.track != null ? this.props.track.name : ""
+            }
+            submitInput={this.createNewPlaylist}
+            closeDialog={this.closeNewPlaylistAlert}
+          />
+        )}
         <View style={styles.headerBackground}>
           <View style={styles.center}>
             <View style={styles.leftAlignedCancelButton}>
@@ -116,6 +118,7 @@ class AllPlaylistsScreen extends React.Component {
                     key={playlist.id}
                     title={playlist.name}
                     subtitle={`${playlist.numOfTracks} songs`}
+                    defaultImage={emptyPlaylist}
                     image={playlist.image}
                     onPress={() => this.props.playlistSelected(playlist)}
                   />

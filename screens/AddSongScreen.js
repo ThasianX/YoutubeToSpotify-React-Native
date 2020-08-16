@@ -22,23 +22,27 @@ import {
 import { connect } from "react-redux";
 import ImageTextRow from "../components/ImageTextRow";
 import QuerySelection from "../components/QuerySelection";
-import { getKeywordQuery } from "../utils";
+import { getKeywordQuery, emptyTrack } from "../utils";
 
 const windowHeight = Dimensions.get("window").height;
 
 class AddSongScreen extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    opacity: new Animated.Value(0.2),
+    scrollEnabled: false,
+  };
 
-    this.state = {
-      opacity: new Animated.Value(1),
-      scrollEnabled: false,
-    };
+  componentDidMount() {
     this.props.setActiveVideo("axRAL0BXNvw");
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.isShowingPlaylists !== this.props.isShowingPlaylists) {
+    if (prevProps.videoDetails !== this.props.videoDetails) {
+      Animated.spring(this.state.opacity, {
+        toValue: 1,
+        useNativeDriver: true,
+      }).start();
+    } else if (prevProps.isShowingPlaylists !== this.props.isShowingPlaylists) {
       Animated.spring(this.state.opacity, {
         toValue: this.props.isShowingPlaylists ? 0.5 : 1,
         useNativeDriver: true,
@@ -78,6 +82,7 @@ class AddSongScreen extends React.Component {
           image={track.image}
           title={track.name}
           subtitle={track.artists}
+          defaultImage={emptyTrack}
           onPress={() => this.props.setSelectedTrack(track)}
         />
       );
@@ -101,10 +106,9 @@ class AddSongScreen extends React.Component {
     this.setState({ scrollEnabled: contentHeight > (windowHeight * 5) / 11 });
   };
 
-  // TODO: Maybe add some sort of indicator as its loading
   render() {
     return (
-      <View style={[styles.container]}>
+      <View style={styles.container}>
         <AllPlaylistsScreen />
         {this.props.alert && (
           <TransientAlert
@@ -112,60 +116,62 @@ class AddSongScreen extends React.Component {
             onEnded={this.props.resetAlert}
           />
         )}
-        <Animated.View style={[styles.header, { opacity: this.state.opacity }]}>
-          <View style={styles.headerBackground}>
-            <LinearGradient
-              colors={["#3f6b6b", "#121212"]}
-              style={styles.gradient}
-            />
-          </View>
-          {this.props.videoDetails != null && (
-            <View style={styles.headerOverlay}>
-              <View style={styles.trackThumbnailContainer}>
-                <Image
-                  style={styles.trackThumbnail}
-                  source={{ uri: this.props.videoDetails.thumbnail }}
-                  resizeMode="cover"
-                />
-              </View>
-              <Text
-                style={styles.trackTitle}
-                numberOfLines={2}
-                ellipsizeMode={"tail"}
-              >
-                {this.props.videoDetails.title}
-              </Text>
-              <Text style={styles.trackInfo}>
-                {this.props.videoDetails.info}
-              </Text>
-              <RoundedButton
-                title={this.queryTitle("track")}
-                subtitle={this.joinedQueryString(this.props.trackKeywords)}
-                isDisabled={this.isQueryDisabled("track")}
-                onPress={() => this.queryPressed("track")}
-              />
-              <RoundedButton
-                title={this.queryTitle("artist")}
-                subtitle={this.joinedQueryString(this.props.artistKeywords)}
-                isDisabled={this.isQueryDisabled("artist")}
-                onPress={() => this.queryPressed("artist")}
+        <Animated.View style={{ flex: 1, opacity: this.state.opacity }}>
+          <View style={styles.header}>
+            <View style={styles.headerBackground}>
+              <LinearGradient
+                colors={["#3f6b6b", "#121212"]}
+                style={styles.gradient}
               />
             </View>
-          )}
+            {this.props.videoDetails != null && (
+              <View style={styles.headerOverlay}>
+                <View style={styles.trackThumbnailContainer}>
+                  <Image
+                    style={styles.trackThumbnail}
+                    source={{ uri: this.props.videoDetails.thumbnail }}
+                    resizeMode="cover"
+                  />
+                </View>
+                <Text
+                  style={styles.trackTitle}
+                  numberOfLines={2}
+                  ellipsizeMode={"tail"}
+                >
+                  {this.props.videoDetails.title}
+                </Text>
+                <Text style={styles.trackInfo}>
+                  {this.props.videoDetails.info}
+                </Text>
+                <RoundedButton
+                  title={this.queryTitle("track")}
+                  subtitle={this.joinedQueryString(this.props.trackKeywords)}
+                  isDisabled={this.isQueryDisabled("track")}
+                  onPress={() => this.queryPressed("track")}
+                />
+                <RoundedButton
+                  title={this.queryTitle("artist")}
+                  subtitle={this.joinedQueryString(this.props.artistKeywords)}
+                  isDisabled={this.isQueryDisabled("artist")}
+                  onPress={() => this.queryPressed("artist")}
+                />
+              </View>
+            )}
+          </View>
+          <View style={styles.list}>
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              scrollEnabled={this.state.scrollEnabled}
+              onContentSizeChange={this.onContentSizeChange}
+            >
+              {(this.props.selectedQuery != null && <QuerySelection />) ||
+                (!this.props.isLoading &&
+                  (this.props.spotifyTracks.length > 0
+                    ? this.spotifyTrackRows()
+                    : this.emptySpotifyTracksView()))}
+            </ScrollView>
+          </View>
         </Animated.View>
-        <View style={styles.list}>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            scrollEnabled={this.state.scrollEnabled}
-            onContentSizeChange={this.onContentSizeChange}
-          >
-            {(this.props.selectedQuery != null && <QuerySelection />) ||
-              (!this.props.isLoading &&
-                (this.props.spotifyTracks.length > 0
-                  ? this.spotifyTrackRows()
-                  : this.emptySpotifyTracksView()))}
-          </ScrollView>
-        </View>
       </View>
     );
   }
