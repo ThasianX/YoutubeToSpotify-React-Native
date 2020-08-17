@@ -38,13 +38,9 @@ class AddSongScreen extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.videoDetails !== this.props.videoDetails) {
-      Animated.spring(this.state.opacity, {
+      Animated.timing(this.state.opacity, {
         toValue: 1,
-        useNativeDriver: true,
-      }).start();
-    } else if (prevProps.isShowingPlaylists !== this.props.isShowingPlaylists) {
-      Animated.spring(this.state.opacity, {
-        toValue: this.props.isShowingPlaylists ? 0.5 : 1,
+        duration: 300,
         useNativeDriver: true,
       }).start();
     }
