@@ -1,8 +1,6 @@
 import React from "react";
 import { View, Text, Image, Animated, Easing, StyleSheet } from "react-native";
 
-// TODO: Fix font size?
-
 class TransientAlert extends React.Component {
   state = {
     opacity: new Animated.Value(0),
@@ -79,15 +77,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingBottom: 20,
     zIndex: 5,
-    width: 125,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    width: 135,
+    backgroundColor: "rgba(0, 0, 0, 0.6)",
     alignItems: "center",
     borderRadius: 8,
     overflow: "hidden",
   },
   alertImage: {
-    width: 50,
-    height: 50,
+    width: 60,
+    height: 60,
     marginBottom: 8,
     resizeMode: "contain",
     tintColor: "white",
@@ -96,6 +94,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: "white",
     textAlign: "center",
+    lineHeight: 16,
   },
 });
 
