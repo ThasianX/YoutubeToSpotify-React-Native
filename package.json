@@ -10,7 +10,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
     "base-64": "^0.1.0",
-    "expo": "~38.0.8",
+    "expo": "^38.0.9",
     "expo-auth-session": "~1.4.0",
     "expo-blur": "~8.1.2",
     "expo-font": "~8.2.1",
