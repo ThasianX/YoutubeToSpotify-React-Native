@@ -9,7 +9,7 @@ const refreshData = (authData) => {
   };
 };
 
-export const refreshAuthData = () => {
+export const refreshAuthData = (action) => {
   return async (dispatch, getState) => {
     const authData = getAuthData(getState());
     const tokenExpirationTime = authData.expirationTime;
@@ -18,5 +18,7 @@ export const refreshAuthData = () => {
       let refreshedAuthData = await refreshTokens(authData);
       dispatch(refreshData(refreshedAuthData));
     }
+
+    dispatch(action());
   };
 };

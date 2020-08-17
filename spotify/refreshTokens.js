@@ -2,6 +2,7 @@ import { encode as btoa } from "base-64";
 import { getTokens, getSpotifyCredentials } from "./";
 
 export const refreshTokens = async (authData) => {
+  let newTokens;
   try {
     const credentials = await getSpotifyCredentials();
     const credsB64 = btoa(
@@ -18,7 +19,6 @@ export const refreshTokens = async (authData) => {
     });
     const responseJson = await response.json();
 
-    let newTokens;
     if (responseJson.error) {
       newTokens = await getTokens();
     } else {

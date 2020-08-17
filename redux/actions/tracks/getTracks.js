@@ -28,20 +28,20 @@ const getTracksFailure = () => {
 };
 
 export const getTracks = () => {
+  return (dispatch) => {
+    dispatch(refreshAuthData(_getTracks));
+  };
+};
+
+const _getTracks = () => {
   return async (dispatch, getState) => {
     dispatch(requestTracks());
     try {
-      // // dispatch(refreshAuthData());
-
-      const newAuthData = getAuthData(getState());
+      const authData = getAuthData(getState());
       const trackName = getKeywordQuery(getTrackKeywords(getState()));
       const artistName = getKeywordQuery(getArtistKeywords(getState()));
 
-      const tracks = await getTracksForQuery(
-        newAuthData,
-        trackName,
-        artistName
-      );
+      const tracks = await getTracksForQuery(authData, trackName, artistName);
       dispatch(getTracksSuccess(tracks));
     } catch (error) {
       console.error(error);
