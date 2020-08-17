@@ -8,6 +8,7 @@ import {
   ScrollView,
   Animated,
   Platform,
+  PanResponder,
 } from "react-native";
 import ImageTextRow from "../components/ImageTextRow";
 import RoundedButton from "../components/RoundedButton";
@@ -23,18 +24,26 @@ import { BlurView } from "expo-blur";
 
 const closedOffset = Dimensions.get("window").height;
 const openOffset = 54;
+const boundOffset = 44;
 const HEADER_HEIGHT = 60;
+const swipeThreshold = closedOffset / 2;
 
-// TODO: add modal swipe to this
+// iOS has negative initial scroll value because content inset...
+const topScrollPos = Platform.OS === "ios" ? -HEADER_HEIGHT : 0;
+
 class AllPlaylistsScreen extends React.Component {
-  state = {
-    scrollY: new Animated.Value(
-      // iOS has negative initial scroll value because content inset...
-      Platform.OS === "ios" ? -HEADER_HEIGHT : 0
-    ),
-    modalOffset: new Animated.Value(closedOffset),
-    isShowingNewPlaylistAlert: false,
-  };
+  constructor(props) {
+    super(props);
+
+    const modalOffset = new Animated.Value(closedOffset);
+
+    this.state = {
+      scrollY: topScrollPos,
+      modalOffset: modalOffset,
+      isShowingNewPlaylistAlert: false,
+      pan: this.createModalGesture(modalOffset),
+    };
+  }
 
   componentDidMount() {
     this.toggleModal();
@@ -48,20 +57,26 @@ class AllPlaylistsScreen extends React.Component {
 
   toggleModal = (show) => {
     if (show) {
-      if (this.scrollView) {
-        this.scrollView.scrollTo({ x: 0, y: -HEADER_HEIGHT, animated: false });
-      }
-
-      Animated.spring(this.state.modalOffset, {
-        toValue: openOffset,
-        useNativeDriver: true,
-      }).start();
+      this.open();
     } else {
-      Animated.spring(this.state.modalOffset, {
-        toValue: closedOffset,
-        useNativeDriver: true,
-      }).start();
+      this.close();
     }
+  };
+
+  open = () => {
+    Animated.spring(this.state.modalOffset, {
+      toValue: openOffset,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  close = () => {
+    Animated.spring(this.state.modalOffset, {
+      toValue: closedOffset,
+      useNativeDriver: true,
+    }).start(({ finished }) => {
+      this.scrollView.scrollTo({ x: 0, y: -HEADER_HEIGHT, animated: false });
+    });
   };
 
   createNewPlaylist = (name) => {
@@ -78,6 +93,37 @@ class AllPlaylistsScreen extends React.Component {
   closeNewPlaylistAlert = () => {
     this.setState({
       isShowingNewPlaylistAlert: false,
+    });
+  };
+
+  createModalGesture = (position) => {
+    const onPanStart = (evt, gestureState) => {
+      return true;
+    };
+
+    const animEvt = Animated.event([null, { customY: position }]);
+
+    const onPanMove = (evt, gestureState) => {
+      const predictedY = gestureState.dy + openOffset;
+      if (predictedY >= boundOffset) {
+        gestureState.customY = predictedY;
+        animEvt(evt, gestureState);
+      }
+    };
+
+    const onPanRelease = (evt, gestureState) => {
+      if (gestureState.dy > swipeThreshold) {
+        this.props.onBack();
+      } else {
+        this.open();
+      }
+    };
+
+    return PanResponder.create({
+      onStartShouldSetPanResponder: onPanStart,
+      onPanResponderMove: onPanMove,
+      onPanResponderRelease: onPanRelease,
+      onPanResponderTerminate: onPanRelease,
     });
   };
 
@@ -140,7 +186,6 @@ class AllPlaylistsScreen extends React.Component {
     );
   };
 
-  // TODO: Add blur effect to the header
   render() {
     return (
       <Animated.View
@@ -148,6 +193,7 @@ class AllPlaylistsScreen extends React.Component {
           styles.container,
           { transform: [{ translateY: this.state.modalOffset }] },
         ]}
+        {...this.state.pan.panHandlers}
       >
         {this.state.isShowingNewPlaylistAlert && (
           <DialogAlert
