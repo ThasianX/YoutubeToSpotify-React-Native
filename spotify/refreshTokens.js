@@ -36,8 +36,8 @@ export const refreshTokens = async (authData) => {
       };
     }
   } catch (error) {
-    // TODO: improve this catch logic
-    console.error(`Error occurred while refreshing tokens: ${error}`);
+    console.log(`Error occurred while refreshing tokens: ${error}`);
+    return authData;
   }
 
   return newTokens;
