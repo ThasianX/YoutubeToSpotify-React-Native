@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, Image, Animated, Easing, StyleSheet } from "react-native";
 
+// TODO: Fix font size?
+
 class TransientAlert extends React.Component {
   state = {
     opacity: new Animated.Value(0),
