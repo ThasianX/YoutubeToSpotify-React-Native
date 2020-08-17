@@ -168,11 +168,7 @@ class AllPlaylistsScreen extends React.Component {
               })}
           </View>
         </ScrollView>
-        <BlurView
-          tint={"dark"}
-          intensity={100}
-          style={[StyleSheet.absoluteFill, styles.headerBackground]}
-        >
+        <BlurView tint={"dark"} intensity={100} style={styles.headerBackground}>
           <View style={styles.center}>
             <View style={styles.leftAlignedCancelButton}>
               <TouchableOpacity
@@ -227,31 +223,22 @@ class AllPlaylistsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
+    ...StyleSheet.absoluteFill,
     zIndex: 2,
   },
   backgroundContainer: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
+    ...StyleSheet.absoluteFill,
     backgroundColor: "black",
   },
   modalContainer: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
+    ...StyleSheet.absoluteFill,
     backgroundColor: "#121212",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     overflow: "hidden",
   },
   headerBackground: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
+    ...StyleSheet.absoluteFill,
     backgroundColor: "#191919",
     height: HEADER_HEIGHT,
   },
