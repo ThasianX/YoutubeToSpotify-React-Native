@@ -2,7 +2,7 @@ import { AuthActions } from "../actionTypes";
 
 const initialState = {
   isLoggingIn: false,
-  loggedIn: false,
+  isLoggedIn: false,
   authData: {
     accessToken: "",
     refreshToken: "",
