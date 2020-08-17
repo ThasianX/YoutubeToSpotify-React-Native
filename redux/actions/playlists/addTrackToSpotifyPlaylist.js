@@ -6,6 +6,7 @@ import {
   checkmark,
   cross,
 } from "../../../utils";
+import { refreshAuthData } from "../auth";
 
 const showAlert = (alert) => ({
   type: TrackActions.ADD_TRACK_TO_PLAYLIST,
@@ -13,6 +14,12 @@ const showAlert = (alert) => ({
 });
 
 export const addTrackToSpotifyPlaylist = (playlist) => {
+  return (dispatch) => {
+    dispatch(refreshAuthData(() => _addTrackToSpotifyPlaylist(playlist)));
+  };
+};
+
+const _addTrackToSpotifyPlaylist = (playlist) => {
   return async (dispatch, getState) => {
     let success = await addTrackToPlaylist(
       getAuthData(getState()),

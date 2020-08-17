@@ -28,9 +28,6 @@ const boundOffset = 44;
 const HEADER_HEIGHT = 60;
 const swipeThreshold = closedOffset / 2;
 
-// iOS has negative initial scroll value because content inset...
-const topScrollPos = Platform.OS === "ios" ? -HEADER_HEIGHT : 0;
-
 class AllPlaylistsScreen extends React.Component {
   constructor(props) {
     super(props);

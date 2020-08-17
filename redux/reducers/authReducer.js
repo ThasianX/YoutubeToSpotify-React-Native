@@ -2,12 +2,8 @@ import { AuthActions } from "../actionTypes";
 
 const initialState = {
   isLoggingIn: false,
-  loggedIn: false,
-  authData: {
-    accessToken: "",
-    refreshToken: "",
-    expirationTime: "",
-  },
+  isLoggedIn: false,
+  authData: null,
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -33,11 +29,7 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoggedIn: false,
-        authData: {
-          accessToken: "",
-          refreshToken: "",
-          expirationTime: "",
-        },
+        authData: null,
       };
     case AuthActions.DATA_REFRESH:
       return {

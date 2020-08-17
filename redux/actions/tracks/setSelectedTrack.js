@@ -1,6 +1,7 @@
 import { getAllUserOwnedPlaylists } from "../../../spotify";
 import { getAuthData } from "../../../utils";
 import { TrackActions, PlaylistActions } from "../../actionTypes";
+import { refreshAuthData } from "../auth";
 
 const requestUserPlaylists = () => ({
   type: PlaylistActions.GET_USER_PLAYLISTS_REQUEST,
@@ -21,6 +22,12 @@ const showPlaylists = (selectedTrack) => ({
 });
 
 export const setSelectedTrack = (track) => {
+  return (dispatch) => {
+    dispatch(refreshAuthData(() => _setSelectedTrack(track)));
+  };
+};
+
+const _setSelectedTrack = (track) => {
   return async (dispatch, getState) => {
     try {
       dispatch(requestUserPlaylists());
