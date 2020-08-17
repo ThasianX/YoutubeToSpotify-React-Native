@@ -38,7 +38,6 @@ class AllPlaylistsScreen extends React.Component {
     const modalOffset = new Animated.Value(closedOffset);
 
     this.state = {
-      scrollY: topScrollPos,
       modalOffset: modalOffset,
       isShowingNewPlaylistAlert: false,
       pan: this.createModalGesture(modalOffset),
@@ -112,8 +111,13 @@ class AllPlaylistsScreen extends React.Component {
     };
 
     const onPanRelease = (evt, gestureState) => {
-      if (gestureState.dy > swipeThreshold) {
-        this.props.onBack();
+      if (gestureState.dy > swipeThreshold || gestureState.vy > 1) {
+        Animated.spring(this.state.modalOffset, {
+          toValue: closedOffset,
+          useNativeDriver: true,
+        }).start(({ finished }) => {
+          this.props.onBack();
+        });
       } else {
         this.open();
       }
@@ -187,14 +191,26 @@ class AllPlaylistsScreen extends React.Component {
   };
 
   render() {
+    const opacity = this.state.modalOffset.interpolate({
+      inputRange: [openOffset, closedOffset],
+      outputRange: [0.6, 0],
+    });
+
     return (
-      <Animated.View
-        style={[
-          styles.container,
-          { transform: [{ translateY: this.state.modalOffset }] },
-        ]}
-        {...this.state.pan.panHandlers}
-      >
+      <View style={[styles.container]} pointerEvents="box-none">
+        <Animated.View
+          style={[styles.backgroundContainer, { opacity: opacity }]}
+          pointerEvents="none"
+        />
+        <Animated.View
+          style={[
+            styles.modalContainer,
+            { transform: [{ translateY: this.state.modalOffset }] },
+          ]}
+          {...this.state.pan.panHandlers}
+        >
+          {this.renderContent()}
+        </Animated.View>
         {this.state.isShowingNewPlaylistAlert && (
           <DialogAlert
             initialInputText={
@@ -204,8 +220,7 @@ class AllPlaylistsScreen extends React.Component {
             closeDialog={this.closeNewPlaylistAlert}
           />
         )}
-        {this.renderContent()}
-      </Animated.View>
+      </View>
     );
   }
 }
@@ -216,6 +231,17 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     zIndex: 2,
+  },
+  backgroundContainer: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "black",
+  },
+  modalContainer: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
     backgroundColor: "#121212",
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
