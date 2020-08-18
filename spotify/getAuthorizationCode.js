@@ -20,6 +20,7 @@ export const getAuthorizationCode = async () => {
       (scopes ? "&scope=" + encodeURIComponent(scopes) : "") +
       "&redirect_uri=" +
       encodeURIComponent(credentials.redirectUri),
+    returnUrl: "youtubetospotify://redirect",
   });
 
   if (result["type"] === "success") {

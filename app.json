@@ -17,10 +17,15 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kevinli.youtubetospotify"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "android": {
+      "package": "com.kevinli.youtubetospotify"
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
   }
 }
