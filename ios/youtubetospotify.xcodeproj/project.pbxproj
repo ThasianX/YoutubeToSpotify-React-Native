@@ -14,6 +14,7 @@
 		1E0EA8BC24EC4AF7005B13CA /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EA8BA24EC4AF6005B13CA /* MainInterface.storyboard */; };
 		1E0EA8C024EC4AF7005B13CA /* ShareMenu.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1E0EA8B624EC4AF6005B13CA /* ShareMenu.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		1E0EA8C624EC4B89005B13CA /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0EA8C524EC4B89005B13CA /* ShareViewController.swift */; };
+		1E0EA8CB24EC5A7F005B13CA /* ReactShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0EA8CA24EC5A7F005B13CA /* ReactShareViewController.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		96905EF65AED1B983A6B3ABC /* libPods-youtubetospotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
@@ -58,6 +59,7 @@
 		1E0EA8BD24EC4AF7005B13CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E0EA8C524EC4B89005B13CA /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareViewController.swift; path = "../../node_modules/react-native-share-menu/ios/ShareViewController.swift"; sourceTree = "<group>"; };
 		1E0EA8C724EC59EA005B13CA /* ShareMenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShareMenu-Bridging-Header.h"; sourceTree = "<group>"; };
+		1E0EA8CA24EC5A7F005B13CA /* ReactShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactShareViewController.swift; path = "../../node_modules/react-native-share-menu/ios/ReactShareViewController.swift"; sourceTree = "<group>"; };
 		378C64D3B29D7384B4C7000D /* Pods-youtubetospotify-ShareMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify-ShareMenu.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify-ShareMenu/Pods-youtubetospotify-ShareMenu.debug.xcconfig"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtubetospotify.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-youtubetospotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.debug.xcconfig"; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		1E0EA8B724EC4AF6005B13CA /* ShareMenu */ = {
 			isa = PBXGroup;
 			children = (
+				1E0EA8CA24EC5A7F005B13CA /* ReactShareViewController.swift */,
 				1E0EA8C524EC4B89005B13CA /* ShareViewController.swift */,
 				1E0EA8BA24EC4AF6005B13CA /* MainInterface.storyboard */,
 				1E0EA8BD24EC4AF7005B13CA /* Info.plist */,
@@ -378,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E0EA8CB24EC5A7F005B13CA /* ReactShareViewController.swift in Sources */,
 				1E0EA8C624EC4B89005B13CA /* ShareViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
