@@ -6,7 +6,7 @@ import MobileCoreServices
 import Photos
 
 class ShareViewController: SLComposeServiceViewController {
-  let hostAppBundleIdentifier = "com.kevinli.youtubetospotify.YoutubeToSpotifyShareExt"
+  let hostAppBundleIdentifier = "com.kevinli.youtubetospotify"
   let sharedKey = "ShareKey"
   var sharedMedia: [SharedMediaFile] = []
   var sharedText: [String] = []
@@ -198,7 +198,7 @@ class ShareViewController: SLComposeServiceViewController {
   }
 
   private func redirectToHostApp(type: RedirectType) {
-    let url = URL(string: "ShareMedia://dataUrl=\(sharedKey)#\(type)")
+    let url = URL(string: "youtubetospotify://dataUrl=\(sharedKey)#\(type)")
     var responder = self as UIResponder?
     let selectorOpenURL = sel_registerName("openURL:")
 
