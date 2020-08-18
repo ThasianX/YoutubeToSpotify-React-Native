@@ -11,10 +11,37 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1EB0688C24EB84D0000A644B /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB0688B24EB84D0000A644B /* ShareViewController.swift */; };
+		1EB0688F24EB84D0000A644B /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1EB0688D24EB84D0000A644B /* MainInterface.storyboard */; };
+		1EB0689324EB84D0000A644B /* YoutubeToSpotifyShareExt.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1EB0688924EB84D0000A644B /* YoutubeToSpotifyShareExt.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		96905EF65AED1B983A6B3ABC /* libPods-youtubetospotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1EB0689124EB84D0000A644B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1EB0688824EB84D0000A644B;
+			remoteInfo = YoutubeToSpotifyShareExt;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1EB0689724EB84D0000A644B /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1EB0689324EB84D0000A644B /* YoutubeToSpotifyShareExt.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -26,6 +53,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = youtubetospotify/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = youtubetospotify/main.m; sourceTree = "<group>"; };
 		1EB0688424EB842D000A644B /* youtubetospotify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = youtubetospotify.entitlements; path = youtubetospotify/youtubetospotify.entitlements; sourceTree = "<group>"; };
+		1EB0688924EB84D0000A644B /* YoutubeToSpotifyShareExt.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = YoutubeToSpotifyShareExt.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1EB0688B24EB84D0000A644B /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		1EB0688E24EB84D0000A644B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		1EB0689024EB84D0000A644B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtubetospotify.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-youtubetospotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-youtubetospotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.release.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.release.xcconfig"; sourceTree = "<group>"; };
@@ -41,6 +72,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				96905EF65AED1B983A6B3ABC /* libPods-youtubetospotify.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EB0688624EB84D0000A644B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +100,16 @@
 				1EB0688424EB842D000A644B /* youtubetospotify.entitlements */,
 			);
 			name = youtubetospotify;
+			sourceTree = "<group>";
+		};
+		1EB0688A24EB84D0000A644B /* YoutubeToSpotifyShareExt */ = {
+			isa = PBXGroup;
+			children = (
+				1EB0688B24EB84D0000A644B /* ShareViewController.swift */,
+				1EB0688D24EB84D0000A644B /* MainInterface.storyboard */,
+				1EB0689024EB84D0000A644B /* Info.plist */,
+			);
+			path = YoutubeToSpotifyShareExt;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
@@ -86,6 +134,7 @@
 			children = (
 				13B07FAE1A68108700A75B9A /* youtubetospotify */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				1EB0688A24EB84D0000A644B /* YoutubeToSpotifyShareExt */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
@@ -99,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* youtubetospotify.app */,
+				1EB0688924EB84D0000A644B /* YoutubeToSpotifyShareExt.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,15 +184,34 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				1EB0689724EB84D0000A644B /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1EB0689224EB84D0000A644B /* PBXTargetDependency */,
 			);
 			name = youtubetospotify;
 			productName = youtubetospotify;
 			productReference = 13B07F961A680F5B00A75B9A /* youtubetospotify.app */;
 			productType = "com.apple.product-type.application";
+		};
+		1EB0688824EB84D0000A644B /* YoutubeToSpotifyShareExt */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1EB0689424EB84D0000A644B /* Build configuration list for PBXNativeTarget "YoutubeToSpotifyShareExt" */;
+			buildPhases = (
+				1EB0688524EB84D0000A644B /* Sources */,
+				1EB0688624EB84D0000A644B /* Frameworks */,
+				1EB0688724EB84D0000A644B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = YoutubeToSpotifyShareExt;
+			productName = YoutubeToSpotifyShareExt;
+			productReference = 1EB0688924EB84D0000A644B /* YoutubeToSpotifyShareExt.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -150,11 +219,17 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 75H2NCGMKS;
 						LastSwiftMigration = 1120;
+					};
+					1EB0688824EB84D0000A644B = {
+						CreatedOnToolsVersion = 11.6;
+						DevelopmentTeam = 75H2NCGMKS;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -172,6 +247,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* youtubetospotify */,
+				1EB0688824EB84D0000A644B /* YoutubeToSpotifyShareExt */,
 			);
 		};
 /* End PBXProject section */
@@ -185,6 +261,14 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1EB0688724EB84D0000A644B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EB0688F24EB84D0000A644B /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +342,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1EB0688524EB84D0000A644B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1EB0688C24EB84D0000A644B /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1EB0689224EB84D0000A644B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1EB0688824EB84D0000A644B /* YoutubeToSpotifyShareExt */;
+			targetProxy = 1EB0689124EB84D0000A644B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
@@ -270,6 +370,14 @@
 			path = youtubetospotify;
 			sourceTree = "<group>";
 		};
+		1EB0688D24EB84D0000A644B /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1EB0688E24EB84D0000A644B /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -277,6 +385,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C2E3173556A471DD304B334 /* Pods-youtubetospotify.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = youtubetospotify/youtubetospotify.entitlements;
@@ -307,6 +416,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A4D352CD337FB3A3BF06240 /* Pods-youtubetospotify.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = youtubetospotify/youtubetospotify.entitlements;
@@ -324,6 +434,61 @@
 				PRODUCT_NAME = youtubetospotify;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		1EB0689524EB84D0000A644B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 75H2NCGMKS;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = YoutubeToSpotifyShareExt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.youtubetospotify.YoutubeToSpotifyShareExt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1EB0689624EB84D0000A644B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 75H2NCGMKS;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = YoutubeToSpotifyShareExt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.youtubetospotify.YoutubeToSpotifyShareExt;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -450,6 +615,15 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1EB0689424EB84D0000A644B /* Build configuration list for PBXNativeTarget "YoutubeToSpotifyShareExt" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EB0689524EB84D0000A644B /* Debug */,
+				1EB0689624EB84D0000A644B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
