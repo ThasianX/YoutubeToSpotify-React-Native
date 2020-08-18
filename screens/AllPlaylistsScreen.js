@@ -22,6 +22,8 @@ import {
 import { emptyPlaylist } from "../utils";
 import { BlurView } from "expo-blur";
 
+import ReceiveSharingIntent from "react-native-receive-sharing-intent";
+
 const closedOffset = Dimensions.get("window").height;
 const openOffset = 54;
 const boundOffset = 44;
@@ -49,6 +51,21 @@ class AllPlaylistsScreen extends React.Component {
     if (this.props.show !== prevProps.show) {
       this.toggleModal(this.props.show);
     }
+
+    // To get All Recived Urls
+    ReceiveSharingIntent.getReceivedFiles(
+      (files) => {
+        console.log(files);
+        // files returns as JSON Array example
+        //[{ filePath: null, text: null, weblink: null, mimeType: null, contentUri: null, fileName: null, extension: null }]
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    // To clear Intents
+    ReceiveSharingIntent.clearReceivedFiles();
   }
 
   toggleModal = (show) => {
