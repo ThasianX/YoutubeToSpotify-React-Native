@@ -11,10 +11,38 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		1E0EA8BC24EC4AF7005B13CA /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E0EA8BA24EC4AF6005B13CA /* MainInterface.storyboard */; };
+		1E0EA8C024EC4AF7005B13CA /* ShareMenu.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1E0EA8B624EC4AF6005B13CA /* ShareMenu.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		1E0EA8C624EC4B89005B13CA /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E0EA8C524EC4B89005B13CA /* ShareViewController.swift */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		96905EF65AED1B983A6B3ABC /* libPods-youtubetospotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
+		F14CC5EA07429D66FBD7B1A0 /* libPods-youtubetospotify-ShareMenu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744BC0C37843C83B636D8DDE /* libPods-youtubetospotify-ShareMenu.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1E0EA8BE24EC4AF7005B13CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1E0EA8B524EC4AF6005B13CA;
+			remoteInfo = ShareMenu;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1E0EA8C124EC4AF7005B13CA /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1E0EA8C024EC4AF7005B13CA /* ShareMenu.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -25,9 +53,16 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = youtubetospotify/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = youtubetospotify/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = youtubetospotify/main.m; sourceTree = "<group>"; };
+		1E0EA8B624EC4AF6005B13CA /* ShareMenu.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareMenu.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E0EA8BB24EC4AF6005B13CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		1E0EA8BD24EC4AF7005B13CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E0EA8C524EC4B89005B13CA /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareViewController.swift; path = "../../node_modules/react-native-share-menu/ios/ShareViewController.swift"; sourceTree = "<group>"; };
+		378C64D3B29D7384B4C7000D /* Pods-youtubetospotify-ShareMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify-ShareMenu.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify-ShareMenu/Pods-youtubetospotify-ShareMenu.debug.xcconfig"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtubetospotify.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-youtubetospotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.debug.xcconfig"; sourceTree = "<group>"; };
+		744BC0C37843C83B636D8DDE /* libPods-youtubetospotify-ShareMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtubetospotify-ShareMenu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A4D352CD337FB3A3BF06240 /* Pods-youtubetospotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.release.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.release.xcconfig"; sourceTree = "<group>"; };
+		92918DEE9B6B72CF7926DADF /* Pods-youtubetospotify-ShareMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify-ShareMenu.release.xcconfig"; path = "Target Support Files/Pods-youtubetospotify-ShareMenu/Pods-youtubetospotify-ShareMenu.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = youtubetospotify/SplashScreen.storyboard; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -40,6 +75,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				96905EF65AED1B983A6B3ABC /* libPods-youtubetospotify.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E0EA8B324EC4AF6005B13CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F14CC5EA07429D66FBD7B1A0 /* libPods-youtubetospotify-ShareMenu.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,12 +105,23 @@
 			name = youtubetospotify;
 			sourceTree = "<group>";
 		};
+		1E0EA8B724EC4AF6005B13CA /* ShareMenu */ = {
+			isa = PBXGroup;
+			children = (
+				1E0EA8C524EC4B89005B13CA /* ShareViewController.swift */,
+				1E0EA8BA24EC4AF6005B13CA /* MainInterface.storyboard */,
+				1E0EA8BD24EC4AF7005B13CA /* Info.plist */,
+			);
+			path = ShareMenu;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */,
+				744BC0C37843C83B636D8DDE /* libPods-youtubetospotify-ShareMenu.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -84,6 +138,7 @@
 			children = (
 				13B07FAE1A68108700A75B9A /* youtubetospotify */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				1E0EA8B724EC4AF6005B13CA /* ShareMenu */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				D65327D7A22EEC0BE12398D9 /* Pods */,
@@ -97,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* youtubetospotify.app */,
+				1E0EA8B624EC4AF6005B13CA /* ShareMenu.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,6 +171,8 @@
 			children = (
 				6C2E3173556A471DD304B334 /* Pods-youtubetospotify.debug.xcconfig */,
 				7A4D352CD337FB3A3BF06240 /* Pods-youtubetospotify.release.xcconfig */,
+				378C64D3B29D7384B4C7000D /* Pods-youtubetospotify-ShareMenu.debug.xcconfig */,
+				92918DEE9B6B72CF7926DADF /* Pods-youtubetospotify-ShareMenu.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -132,15 +190,35 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				1E0EA8C124EC4AF7005B13CA /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				1E0EA8BF24EC4AF7005B13CA /* PBXTargetDependency */,
 			);
 			name = youtubetospotify;
 			productName = youtubetospotify;
 			productReference = 13B07F961A680F5B00A75B9A /* youtubetospotify.app */;
 			productType = "com.apple.product-type.application";
+		};
+		1E0EA8B524EC4AF6005B13CA /* ShareMenu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1E0EA8C424EC4AF7005B13CA /* Build configuration list for PBXNativeTarget "ShareMenu" */;
+			buildPhases = (
+				FFFDBD8CCC8B2EB13B791788 /* [CP] Check Pods Manifest.lock */,
+				1E0EA8B224EC4AF6005B13CA /* Sources */,
+				1E0EA8B324EC4AF6005B13CA /* Frameworks */,
+				1E0EA8B424EC4AF6005B13CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ShareMenu;
+			productName = ShareMenu;
+			productReference = 1E0EA8B624EC4AF6005B13CA /* ShareMenu.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -148,11 +226,18 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1160;
 				LastUpgradeCheck = 1130;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 75H2NCGMKS;
 						LastSwiftMigration = 1120;
+					};
+					1E0EA8B524EC4AF6005B13CA = {
+						CreatedOnToolsVersion = 11.6;
+						DevelopmentTeam = 75H2NCGMKS;
+						LastSwiftMigration = 1160;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -170,6 +255,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* youtubetospotify */,
+				1E0EA8B524EC4AF6005B13CA /* ShareMenu */,
 			);
 		};
 /* End PBXProject section */
@@ -183,6 +269,14 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1E0EA8B424EC4AF6005B13CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E0EA8BC24EC4AF7005B13CA /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -244,6 +338,28 @@
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		FFFDBD8CCC8B2EB13B791788 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-youtubetospotify-ShareMenu-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -256,7 +372,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1E0EA8B224EC4AF6005B13CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1E0EA8C624EC4B89005B13CA /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1E0EA8BF24EC4AF7005B13CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1E0EA8B524EC4AF6005B13CA /* ShareMenu */;
+			targetProxy = 1E0EA8BE24EC4AF7005B13CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
@@ -268,6 +400,14 @@
 			path = youtubetospotify;
 			sourceTree = "<group>";
 		};
+		1E0EA8BA24EC4AF6005B13CA /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1E0EA8BB24EC4AF6005B13CA /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -275,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6C2E3173556A471DD304B334 /* Pods-youtubetospotify.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = youtubetospotify/youtubetospotify.entitlements;
@@ -305,6 +446,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7A4D352CD337FB3A3BF06240 /* Pods-youtubetospotify.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = youtubetospotify/youtubetospotify.entitlements;
@@ -322,6 +464,67 @@
 				PRODUCT_NAME = youtubetospotify;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		1E0EA8C224EC4AF7005B13CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 378C64D3B29D7384B4C7000D /* Pods-youtubetospotify-ShareMenu.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 75H2NCGMKS;
+				ENABLE_BITCODE = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ShareMenu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.youtubetospotify.ShareMenu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1E0EA8C324EC4AF7005B13CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92918DEE9B6B72CF7926DADF /* Pods-youtubetospotify-ShareMenu.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 75H2NCGMKS;
+				ENABLE_BITCODE = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ShareMenu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.youtubetospotify.ShareMenu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -448,6 +651,15 @@
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
 				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1E0EA8C424EC4AF7005B13CA /* Build configuration list for PBXNativeTarget "ShareMenu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E0EA8C224EC4AF7005B13CA /* Debug */,
+				1E0EA8C324EC4AF7005B13CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
