@@ -57,6 +57,7 @@
 		1E0EA8BB24EC4AF6005B13CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		1E0EA8BD24EC4AF7005B13CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E0EA8C524EC4B89005B13CA /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareViewController.swift; path = "../../node_modules/react-native-share-menu/ios/ShareViewController.swift"; sourceTree = "<group>"; };
+		1E0EA8C724EC59EA005B13CA /* ShareMenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShareMenu-Bridging-Header.h"; sourceTree = "<group>"; };
 		378C64D3B29D7384B4C7000D /* Pods-youtubetospotify-ShareMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify-ShareMenu.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify-ShareMenu/Pods-youtubetospotify-ShareMenu.debug.xcconfig"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtubetospotify.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-youtubetospotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +112,7 @@
 				1E0EA8C524EC4B89005B13CA /* ShareViewController.swift */,
 				1E0EA8BA24EC4AF6005B13CA /* MainInterface.storyboard */,
 				1E0EA8BD24EC4AF7005B13CA /* Info.plist */,
+				1E0EA8C724EC59EA005B13CA /* ShareMenu-Bridging-Header.h */,
 			);
 			path = ShareMenu;
 			sourceTree = "<group>";
@@ -492,6 +494,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareMenu/ShareMenu-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -522,6 +525,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.kevinli.youtubetospotify.ShareMenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "ShareMenu/ShareMenu-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
