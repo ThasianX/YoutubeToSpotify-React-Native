@@ -25,6 +25,7 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = youtubetospotify/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = youtubetospotify/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = youtubetospotify/main.m; sourceTree = "<group>"; };
+		1EB0688424EB842D000A644B /* youtubetospotify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = youtubetospotify.entitlements; path = youtubetospotify/youtubetospotify.entitlements; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtubetospotify.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-youtubetospotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-youtubetospotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.release.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.release.xcconfig"; sourceTree = "<group>"; };
@@ -58,6 +59,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
+				1EB0688424EB842D000A644B /* youtubetospotify.entitlements */,
 			);
 			name = youtubetospotify;
 			sourceTree = "<group>";
