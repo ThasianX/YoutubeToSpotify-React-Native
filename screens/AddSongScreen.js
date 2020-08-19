@@ -23,6 +23,7 @@ import { connect } from "react-redux";
 import ImageTextRow from "../components/ImageTextRow";
 import QuerySelection from "../components/QuerySelection";
 import { getKeywordQuery, emptyTrack } from "../utils";
+import { ShareMenuReactView } from "react-native-share-menu";
 
 const windowHeight = Dimensions.get("window").height;
 
@@ -33,7 +34,12 @@ class AddSongScreen extends React.Component {
   };
 
   componentDidMount() {
-    this.props.setActiveVideo("axRAL0BXNvw");
+    ShareMenuReactView.data().then(({ mimeType, data }) => {
+      console.log("MIMETYPE");
+      console.log(mimeType);
+      console.log("DATA");
+      console.log(data);
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -104,72 +110,80 @@ class AddSongScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <AllPlaylistsScreen />
-        {this.props.alert && (
-          <TransientAlert
-            {...this.props.alert}
-            onEnded={this.props.resetAlert}
-          />
-        )}
-        <Animated.View style={{ flex: 1, opacity: this.state.opacity }}>
-          <View style={styles.header}>
-            <View style={styles.headerBackground}>
-              <LinearGradient
-                colors={["#3f6b6b", "#121212"]}
-                style={styles.gradient}
-              />
-            </View>
-            {this.props.videoDetails != null && (
-              <View style={styles.headerOverlay}>
-                <View style={styles.trackThumbnailContainer}>
-                  <Image
-                    style={styles.trackThumbnail}
-                    source={{ uri: this.props.videoDetails.thumbnail }}
-                    resizeMode="cover"
-                  />
-                </View>
-                <Text
-                  style={styles.trackTitle}
-                  numberOfLines={2}
-                  ellipsizeMode={"tail"}
-                >
-                  {this.props.videoDetails.title}
-                </Text>
-                <Text style={styles.trackInfo}>
-                  {this.props.videoDetails.info}
-                </Text>
-                <RoundedButton
-                  title={this.queryTitle("track")}
-                  subtitle={this.joinedQueryString(this.props.trackKeywords)}
-                  isDisabled={this.isQueryDisabled("track")}
-                  onPress={() => this.queryPressed("track")}
-                />
-                <RoundedButton
-                  title={this.queryTitle("artist")}
-                  subtitle={this.joinedQueryString(this.props.artistKeywords)}
-                  isDisabled={this.isQueryDisabled("artist")}
-                  onPress={() => this.queryPressed("artist")}
-                />
-              </View>
-            )}
-          </View>
-          <View style={styles.list}>
-            <ScrollView
-              contentContainerStyle={styles.scrollView}
-              showsVerticalScrollIndicator={false}
-              scrollEnabled={this.state.scrollEnabled}
-              onContentSizeChange={this.onContentSizeChange}
-            >
-              {(this.props.selectedQuery != null && <QuerySelection />) ||
-                (!this.props.isLoading &&
-                  (this.props.spotifyTracks.length > 0
-                    ? this.spotifyTrackRows()
-                    : this.emptySpotifyTracksView()))}
-            </ScrollView>
-          </View>
-        </Animated.View>
+      <View
+        style={[
+          styles.container,
+          { alignItems: "center", justifyContent: "center" },
+        ]}
+      >
+        <Text style={styles.trackTitle}>AFGADFGADFGADFGADFGADFGADFG</Text>
       </View>
+      // <View style={styles.container}>
+      //   <AllPlaylistsScreen />
+      //   {this.props.alert && (
+      //     <TransientAlert
+      //       {...this.props.alert}
+      //       onEnded={this.props.resetAlert}
+      //     />
+      //   )}
+      //   <Animated.View style={{ flex: 1, opacity: this.state.opacity }}>
+      //     <View style={styles.header}>
+      //       <View style={styles.headerBackground}>
+      //         <LinearGradient
+      //           colors={["#3f6b6b", "#121212"]}
+      //           style={styles.gradient}
+      //         />
+      //       </View>
+      //       {this.props.videoDetails != null && (
+      //         <View style={styles.headerOverlay}>
+      //           <View style={styles.trackThumbnailContainer}>
+      //             <Image
+      //               style={styles.trackThumbnail}
+      //               source={{ uri: this.props.videoDetails.thumbnail }}
+      //               resizeMode="cover"
+      //             />
+      //           </View>
+      //           <Text
+      //             style={styles.trackTitle}
+      //             numberOfLines={2}
+      //             ellipsizeMode={"tail"}
+      //           >
+      //             {this.props.videoDetails.title}
+      //           </Text>
+      //           <Text style={styles.trackInfo}>
+      //             {this.props.videoDetails.info}
+      //           </Text>
+      //           <RoundedButton
+      //             title={this.queryTitle("track")}
+      //             subtitle={this.joinedQueryString(this.props.trackKeywords)}
+      //             isDisabled={this.isQueryDisabled("track")}
+      //             onPress={() => this.queryPressed("track")}
+      //           />
+      //           <RoundedButton
+      //             title={this.queryTitle("artist")}
+      //             subtitle={this.joinedQueryString(this.props.artistKeywords)}
+      //             isDisabled={this.isQueryDisabled("artist")}
+      //             onPress={() => this.queryPressed("artist")}
+      //           />
+      //         </View>
+      //       )}
+      //     </View>
+      //     <View style={styles.list}>
+      //       <ScrollView
+      //         contentContainerStyle={styles.scrollView}
+      //         showsVerticalScrollIndicator={false}
+      //         scrollEnabled={this.state.scrollEnabled}
+      //         onContentSizeChange={this.onContentSizeChange}
+      //       >
+      //         {(this.props.selectedQuery != null && <QuerySelection />) ||
+      //           (!this.props.isLoading &&
+      //             (this.props.spotifyTracks.length > 0
+      //               ? this.spotifyTrackRows()
+      //               : this.emptySpotifyTracksView()))}
+      //       </ScrollView>
+      //     </View>
+      //   </Animated.View>
+      // </View>
     );
   }
 }

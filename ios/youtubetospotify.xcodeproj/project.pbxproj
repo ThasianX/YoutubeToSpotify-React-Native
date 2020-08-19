@@ -18,7 +18,7 @@
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
 		96905EF65AED1B983A6B3ABC /* libPods-youtubetospotify.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		F14CC5EA07429D66FBD7B1A0 /* libPods-youtubetospotify-ShareMenu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 744BC0C37843C83B636D8DDE /* libPods-youtubetospotify-ShareMenu.a */; };
+		C35D57FE628C63FDC0DB0326 /* libPods-ShareMenu.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14FE64AC4967C7FA1F921E42 /* libPods-ShareMenu.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,16 +54,20 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = youtubetospotify/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = youtubetospotify/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = youtubetospotify/main.m; sourceTree = "<group>"; };
+		14FE64AC4967C7FA1F921E42 /* libPods-ShareMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ShareMenu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E0EA8B624EC4AF6005B13CA /* ShareMenu.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareMenu.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E0EA8BB24EC4AF6005B13CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		1E0EA8BD24EC4AF7005B13CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1E0EA8C524EC4B89005B13CA /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShareViewController.swift; path = "../../node_modules/react-native-share-menu/ios/ShareViewController.swift"; sourceTree = "<group>"; };
 		1E0EA8C724EC59EA005B13CA /* ShareMenu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShareMenu-Bridging-Header.h"; sourceTree = "<group>"; };
 		1E0EA8CA24EC5A7F005B13CA /* ReactShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReactShareViewController.swift; path = "../../node_modules/react-native-share-menu/ios/ReactShareViewController.swift"; sourceTree = "<group>"; };
+		1E0EA8CE24ECC952005B13CA /* youtubetospotify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = youtubetospotify.entitlements; path = youtubetospotify/youtubetospotify.entitlements; sourceTree = "<group>"; };
+		1E0EA8CF24ECC98D005B13CA /* ShareMenu.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareMenu.entitlements; sourceTree = "<group>"; };
 		378C64D3B29D7384B4C7000D /* Pods-youtubetospotify-ShareMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify-ShareMenu.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify-ShareMenu/Pods-youtubetospotify-ShareMenu.debug.xcconfig"; sourceTree = "<group>"; };
+		551A58A5B20577708FB15CC3 /* Pods-ShareMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareMenu.release.xcconfig"; path = "Target Support Files/Pods-ShareMenu/Pods-ShareMenu.release.xcconfig"; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtubetospotify.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-youtubetospotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.debug.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.debug.xcconfig"; sourceTree = "<group>"; };
-		744BC0C37843C83B636D8DDE /* libPods-youtubetospotify-ShareMenu.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-youtubetospotify-ShareMenu.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		75BF3D1D263CFB2F9A543427 /* Pods-ShareMenu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShareMenu.debug.xcconfig"; path = "Target Support Files/Pods-ShareMenu/Pods-ShareMenu.debug.xcconfig"; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-youtubetospotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify.release.xcconfig"; path = "Target Support Files/Pods-youtubetospotify/Pods-youtubetospotify.release.xcconfig"; sourceTree = "<group>"; };
 		92918DEE9B6B72CF7926DADF /* Pods-youtubetospotify-ShareMenu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-youtubetospotify-ShareMenu.release.xcconfig"; path = "Target Support Files/Pods-youtubetospotify-ShareMenu/Pods-youtubetospotify-ShareMenu.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = youtubetospotify/SplashScreen.storyboard; sourceTree = "<group>"; };
@@ -85,7 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F14CC5EA07429D66FBD7B1A0 /* libPods-youtubetospotify-ShareMenu.a in Frameworks */,
+				C35D57FE628C63FDC0DB0326 /* libPods-ShareMenu.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,6 +108,7 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */,
+				1E0EA8CE24ECC952005B13CA /* youtubetospotify.entitlements */,
 			);
 			name = youtubetospotify;
 			sourceTree = "<group>";
@@ -116,6 +121,7 @@
 				1E0EA8BA24EC4AF6005B13CA /* MainInterface.storyboard */,
 				1E0EA8BD24EC4AF7005B13CA /* Info.plist */,
 				1E0EA8C724EC59EA005B13CA /* ShareMenu-Bridging-Header.h */,
+				1E0EA8CF24ECC98D005B13CA /* ShareMenu.entitlements */,
 			);
 			path = ShareMenu;
 			sourceTree = "<group>";
@@ -126,7 +132,7 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				58EEBF8E8E6FB1BC6CAF49B5 /* libPods-youtubetospotify.a */,
-				744BC0C37843C83B636D8DDE /* libPods-youtubetospotify-ShareMenu.a */,
+				14FE64AC4967C7FA1F921E42 /* libPods-ShareMenu.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -178,6 +184,8 @@
 				7A4D352CD337FB3A3BF06240 /* Pods-youtubetospotify.release.xcconfig */,
 				378C64D3B29D7384B4C7000D /* Pods-youtubetospotify-ShareMenu.debug.xcconfig */,
 				92918DEE9B6B72CF7926DADF /* Pods-youtubetospotify-ShareMenu.release.xcconfig */,
+				75BF3D1D263CFB2F9A543427 /* Pods-ShareMenu.debug.xcconfig */,
+				551A58A5B20577708FB15CC3 /* Pods-ShareMenu.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -194,8 +202,8 @@
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
-				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				1E0EA8C124EC4AF7005B13CA /* Embed App Extensions */,
+				1E83046C24ECE36F003DBCEA /* Bundle React Native code and images */,
 			);
 			buildRules = (
 			);
@@ -289,20 +297,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native code and images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n../node_modules/expo-updates/scripts/create-manifest-ios.sh\n";
-		};
 		08A4A3CD28434E44B6B9DE2E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -343,6 +337,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\nexport ENTRY_FILE=index.share.js\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
+		1E83046C24ECE36F003DBCEA /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,7 +389,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-youtubetospotify-ShareMenu-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ShareMenu-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -494,7 +506,7 @@
 		};
 		1E0EA8C224EC4AF7005B13CA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 378C64D3B29D7384B4C7000D /* Pods-youtubetospotify-ShareMenu.debug.xcconfig */;
+			baseConfigurationReference = 75BF3D1D263CFB2F9A543427 /* Pods-ShareMenu.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -526,7 +538,7 @@
 		};
 		1E0EA8C324EC4AF7005B13CA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 92918DEE9B6B72CF7926DADF /* Pods-youtubetospotify-ShareMenu.release.xcconfig */;
+			baseConfigurationReference = 551A58A5B20577708FB15CC3 /* Pods-ShareMenu.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
